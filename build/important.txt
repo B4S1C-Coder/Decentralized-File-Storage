@@ -1,0 +1,1 @@
+Any binaries in this directory are to be built with optimizastion and should be properly packaged for distribution.

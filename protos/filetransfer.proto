@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package filetransfer;
+
+service SimpleFileUploadService {
+    rpc simpleUpload (simpleUploadRequest) returns (simpleUploadReply) {}
+}
+
+message simpleUploadRequest {
+    string clientCalculatedHash = 1;
+    bytes fileData = 2;
+}
+
+message simpleUploadReply {
+    int32 statusCode = 1;
+    string detail = 2;
+}
