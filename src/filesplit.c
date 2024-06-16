@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "filesplit.h"
+#include "dfs/filesplit.h"
 
 // Note: The outputDirPath must end with a "/" (for Linux and newer Windows versions)
 // and with "\" (for older versions of windows).

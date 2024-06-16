@@ -1,5 +1,5 @@
 #pragma once
-#include "dfsexports.h"
+#include "dfs/dfsexports.h"
 
 extern "C" {
 DFS_EXPORT int divideFileIntoChunks_unencrypted(

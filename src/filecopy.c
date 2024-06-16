@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "filecopy.h"
+#include "dfs/filecopy.h"
 
 int copyContentsOfFile(const char* inputFileName, const char* outputFileName) {
     FILE* inputFile = fopen(inputFileName, "rb");
