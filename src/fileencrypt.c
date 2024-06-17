@@ -42,10 +42,10 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
         char* outputFilePath = (char*)malloc(outputFilePathBufferSize);
         // Constructing the output file path
         snprintf(outputFilePath, outputFilePathBufferSize, "%s%s.%zu%s",
-            outputDirPath, inputFileName, i, "dat");
+            outputDirPath, inputFileName, i, ".dat");
 
         // Check if output file can be opened, if not then abort the operation
-        FILE* outputFile = fopen(outputFilePath, 'wb');
+        FILE* outputFile = fopen(outputFilePath, "wb");
 
         if (!outputFile) {
             printf("[ DFS-CORE ] ERROR: %s, Unable to open: %s\n", strerror(errno), outputFilePath);
@@ -53,7 +53,7 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
         }
 
         // Add the header token to the buffer
-        strcpy(bufferUnencrypted, headerToken);
+        memcpy(bufferUnencrypted, headerToken, headerSizeInBytes);
         size_t bytesRead = fread(bufferUnencrypted+headerSizeInBytes, 1, bytesToReadPerChunk, inputFile);
 
         // Encrypt the buffer, it will be larger than bufferUnencrypted
