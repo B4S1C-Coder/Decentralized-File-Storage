@@ -27,7 +27,7 @@ int divideFileIntoChunks_unencrypted(
     size_t bufferSize = fileSizeInBytes/numChunks + headerSizeInBytes;
 
     char* buffer = (char*)malloc(bufferSize + headerSizeInBytes*sizeof(char));
-    // For now assuming that maximum number of chunks is 9,999,999,999
+    // For now assuming that maximum number of chunks is 9,999,999,999 (IGNORE, JUST IGNORE)
     // This however as of now is NOT ENFORCED
     char chunkNumberBuffer[10];
     // 7: _chunk_, 10: chunkNumberBuffer[10] ki len i.e. 10

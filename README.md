@@ -1,6 +1,8 @@
 # Decentralized File Storage Network (DFS)
 DFS is a small distributed file storage network which allows the user to split and disperse their files over a network ensuring that other than the user no one else can re-construct the files. The network is based on gRPC and peer-to-peer communication, there is no middle man between the user and the storage node.
 
+>**NOTE**: This project uses third party libraries. Please check in the [licenses/](licenses/) folder for the respective licenses of the libraries.
+
 ## Techstack
 - [Django](https://www.djangoproject.com/)
 - [Django REST Framework](https://www.django-rest-framework.org/)
