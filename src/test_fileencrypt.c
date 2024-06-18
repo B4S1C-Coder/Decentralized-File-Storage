@@ -1,6 +1,8 @@
 #include "dfs/fileencrypt.h"
+#include <stdio.h>
 #include <string.h>
 #include <sodium.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
 
@@ -24,13 +26,31 @@ int main(int argc, char* argv[]) {
 
     // Encrypt the file and split it into chunks
     int fileWasSplit = dfs_divideFileIntoChunks_encryptedSecretbox(
-        argv[1], argv[2], 5, ownershipToken, sizeof(ownershipToken), argv[3], key, nonce
+        argv[1], argv[2], 5, ownershipToken, strlen(ownershipToken), argv[3], key, nonce
     );
 
     if (fileWasSplit < 0) {
         printf("[ FAIL ] Test failed. Exit code = %d\n", fileWasSplit);
         return 1;
     }
+
+    // If the operation went correctly only then it is feasible to store the key and nonce
+    // /output/dir/path/key
+    char* keyFilePath = (char*)malloc(strlen(argv[3]) + 4);
+    strcpy(keyFilePath, argv[3]);
+    strcat(keyFilePath, "key");
+
+    FILE* keyFile = fopen(keyFilePath, "wb");
+    fwrite(key, 1, crypto_secretbox_KEYBYTES, keyFile);
+    fclose(keyFile);
+
+    char* nonceFilePath = (char*)malloc(strlen(argv[3]) + 6);
+    strcpy(keyFilePath, argv[3]);
+    strcat(keyFilePath, "nonce");
+
+    FILE* nonceFile = fopen(nonceFilePath, "wb");
+    fwrite(nonce, 1, crypto_secretbox_NONCEBYTES, nonceFile);
+    fclose(nonceFile);
 
     printf("[ PASS ] Test successful. Exit code = %d\n", fileWasSplit);
     return 0;
