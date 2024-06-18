@@ -45,8 +45,8 @@ int main(int argc, char* argv[]) {
     fclose(keyFile);
 
     char* nonceFilePath = (char*)malloc(strlen(argv[3]) + 6);
-    strcpy(keyFilePath, argv[3]);
-    strcat(keyFilePath, "nonce");
+    strcpy(nonceFilePath, argv[3]);
+    strcat(nonceFilePath, "nonce");
 
     FILE* nonceFile = fopen(nonceFilePath, "wb");
     fwrite(nonce, 1, crypto_secretbox_NONCEBYTES, nonceFile);

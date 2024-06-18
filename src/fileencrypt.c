@@ -42,7 +42,7 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
     // By the below format you can have a maximum of 99,999,999,999,999,999,999 chunks
     // This is obviously absurd and since (on 64 bit) size_t can be of 20 digits. 
     // outputFilePath = outputDirPath+inputfilename.LOOPING_VAR.dat\0
-    size_t outputFilePathBufferSize = strlen(outputDirPath)+strlen(inputFileName)+1+20+1+3+1;
+    size_t outputFilePathBufferSize = strlen(outputDirPath)+strlen(inputFileName)+1+sizeof(size_t)+1+3+1;
 
     for (size_t i = 0; i < numChunks; i++) {
         
@@ -66,7 +66,7 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
             bytesToReadPerChunk, inputFile);
 
         // Encrypt the buffer, it will be larger than bufferUnencrypted
-        size_t bufferEncrypted_size_preDetermined = bytesRead+headerSizeInBytes+crypto_secretbox_MACBYTES;
+        size_t bufferEncrypted_size_preDetermined = bufferUnencrypted_size_preDetermined+crypto_secretbox_MACBYTES;
         unsigned char* bufferEncrypted = (unsigned char*)malloc(bufferEncrypted_size_preDetermined);
         
         int encryptionResult = crypto_secretbox_easy(bufferEncrypted, bufferUnencrypted,
