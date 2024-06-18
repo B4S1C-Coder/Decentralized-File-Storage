@@ -7,7 +7,6 @@
 // TO-DO: Implement the function using stream encryption via
 // crypto_secretstream_xchacha20poly1305_<> which is better suited for this purpose
 
-// Below function NOT tested yet
 int dfs_divideFileIntoChunks_encryptedSecretbox(
     const char* inputFilePath, const char* inputFileName, 
     const int numChunks, const char* headerToken,
@@ -27,20 +26,12 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
     size_t fileSizeInBytes = ftell(inputFile);
     fseek(inputFile, 0, SEEK_SET);
 
-    printf("[ DEBUG ] File Size: %zu bytes\n", fileSizeInBytes);
-
     // Each bufferUnencrypted essentially stores the data of one chunk in the format:
     // <HEADER-TOKEN><DATA-OF-CHUNK> ]---> This will get encrypted
     size_t bytesToReadPerChunk = fileSizeInBytes/ numChunks + headerSizeInBytes;
-    printf("[ DEBUG ] Bytes to read per chunk: %zu bytes\n", bytesToReadPerChunk);
     size_t bufferUnencrypted_size_preDetermined = bytesToReadPerChunk + headerSizeInBytes;
     unsigned char* bufferUnencrypted = (unsigned char*)malloc(bufferUnencrypted_size_preDetermined);
-
-    printf("[ DEBUG ] Memory allocated bufferUnencrypted: %zu bytes\n", bufferUnencrypted_size_preDetermined);
-    printf("[ DEBUG ] sizeof bufferUnencrypted (via sizeof): %zu bytes\n", sizeof(bufferUnencrypted));
-
-    // By the below format you can have a maximum of 99,999,999,999,999,999,999 chunks
-    // This is obviously absurd and since (on 64 bit) size_t can be of 20 digits. 
+ 
     // outputFilePath = outputDirPath+inputfilename.LOOPING_VAR.dat\0
     size_t outputFilePathBufferSize = strlen(outputDirPath)+strlen(inputFileName)+1+sizeof(size_t)+1+3+1;
 
@@ -58,7 +49,6 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
             printf("[ DFS-CORE ] ERROR: %s, Unable to open: %s\n", strerror(errno), outputFilePath);
             return -1;
         }
-        printf("[ DEBUG ] [%zu] size of Unencrypted buffer before memcpy ----> %zu\n", i, sizeof(bufferUnencrypted));
 
         // Add the header token to the buffer
         memcpy(bufferUnencrypted, headerToken, headerSizeInBytes);
@@ -79,13 +69,6 @@ int dfs_divideFileIntoChunks_encryptedSecretbox(
             fcloseall();
             return -1;
         }
-
-        printf("[ DEBUG ] [%zu] size of Unencrypted buffer ----> %zu\n", i, sizeof(bufferUnencrypted));
-
-        printf("[ DEBUG ] [%zu] Unencrypted----> %s\n", i, bufferUnencrypted);
-        printf("[ DEBUG ] [%zu] Encrypted----> %s\n", i, bufferEncrypted);
-
-        printf("[ DEBUG ] [%zu] size of encrypted buffer ----> %zu\n", i, sizeof(bufferEncrypted));
 
         fwrite(bufferEncrypted, 1, bufferEncrypted_size_preDetermined, outputFile);
         // fwrite(bufferUnencrypted, 1, bufferUnencrypted_size_preDetermined, outputFile);

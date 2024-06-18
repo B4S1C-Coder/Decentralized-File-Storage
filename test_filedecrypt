@@ -1,0 +1,1 @@
+g++ -I include/ -L libs/ -o debug/test_filedecrypt src/test_filedecrypt.c src/filedecrypt.c -lsodium && ./debug/test_filedecrypt

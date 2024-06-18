@@ -1,0 +1,1 @@
+mkdir dfs_user_client/client_storage/ && mkdir dfs_user_client/client_storage/chunks/ && mkdir dfs_user_client/client_storage/chunks/client_storage/ && touch dfs_user_client/client_storage/text1.txt && echo "PLEASE POPULATE dfs_user_client/client_storage/text1.txt WITH DUMMY DATA IN ORDER TO RUN TESTS."
