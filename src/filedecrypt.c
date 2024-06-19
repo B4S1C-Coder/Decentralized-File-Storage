@@ -46,7 +46,7 @@ int dfs_decryptAndReconstructFile_secretbox(
         unsigned char* bufferEncrypted = (unsigned char*)malloc(chunkSizeInBytes);
         unsigned char* bufferUnencrypted = (unsigned char*)malloc(decryptedDataLength);
 
-        fread(bufferEncrypted, 1, chunkSizeInBytes, chunkFile);
+        size_t bytesRead = fread(bufferEncrypted, 1, chunkSizeInBytes, chunkFile);
         fclose(chunkFile);
 
         if(crypto_secretbox_open_easy(bufferUnencrypted, bufferEncrypted, chunkSizeInBytes, nonce, key) != 0) {
@@ -56,7 +56,34 @@ int dfs_decryptAndReconstructFile_secretbox(
             return -1;
         }
 
-        fwrite(bufferUnencrypted+headerSizeInBytes, 1, decryptedDataLength - headerSizeInBytes, outputFile);
+        // size_t numberOfTrailingNullChars = chunkSizeInBytes - bytesRead;
+        // size_t numberOfTrailingNullChars = 0;
+        // unsigned char* nullPtr = (unsigned char*)memchr(bufferUnencrypted + decryptedDataLength - headerSizeInBytes, 0, headerSizeInBytes);
+        // if (nullPtr != NULL) {
+        //     numberOfTrailingNullChars = (bufferUnencrypted + decryptedDataLength) - (nullPtr + 1);
+        //     printf("[ DEBUG ] [%d] nullPtr = %c\n", i, nullPtr);
+        // }
+
+        size_t numberOfNonNullChars = decryptedDataLength - headerSizeInBytes;
+        const unsigned char* nullCharPtr = (const unsigned char*)memchr(bufferUnencrypted+headerSizeInBytes, 0, decryptedDataLength-headerSizeInBytes);
+
+        if (nullCharPtr != NULL) {
+            printf("[ DEBUG ] [%d] entered nullCharPtr %p\n", i, nullCharPtr);
+            numberOfNonNullChars = nullCharPtr - (bufferUnencrypted+headerSizeInBytes);
+        }
+
+        printf("[ DEBUG ] [%d] Number of non null characters = %zu\n", i, numberOfNonNullChars);
+
+        // printf("[ DEBUG ] [%d] Number of trailing NULL characters = %zu\n", i, numberOfTrailingNullChars);
+
+        // fwrite(bufferUnencrypted+headerSizeInBytes, 1,
+        //     decryptedDataLength - headerSizeInBytes - numberOfTrailingNullChars, outputFile);
+
+        fwrite(bufferUnencrypted+headerSizeInBytes, 1,
+            numberOfNonNullChars, outputFile);
+
+        printf("[ DEBUG ] [%d] Length written to file = %zu\n", i,
+            numberOfNonNullChars - headerSizeInBytes);
 
         free(bufferEncrypted);
         free(bufferUnencrypted);
