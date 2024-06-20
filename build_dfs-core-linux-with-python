@@ -1,0 +1,1 @@
+g++ -shared -I "include/" -L "build/dev/" -o "build/dev/dfs-core-dev-linux-with-python.so" -fPIC src/filecopy.c src/filesplit.c src/fileencrypt.c src/filedecrypt.c src/python_file_encrypt_decrypt.c -lsodium -Wl,-rpath,\$ORIGIN -DEXPORT_DYNAMIC

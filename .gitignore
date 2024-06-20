@@ -6,5 +6,7 @@ dfs_user_client/client_storage
 dfs_tracking_server/__pycache__
 dfs_tracking_server/dfs_tracking_server/__pycache__
 
+debug
+
 .vscode
 .proto-env
