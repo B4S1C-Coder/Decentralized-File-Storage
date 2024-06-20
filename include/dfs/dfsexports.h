@@ -1,5 +1,15 @@
+#pragma once
+
 #ifdef _WIN32
-#define DFS_EXPORT __declspec(dllexport)
+    #ifdef EXPORT_DYNAMIC
+        #define DFS_EXPORT __declspec(dllexport)
+    #else
+        #define DFS_EXPORT
+    #endif
 #else
-#define DFS_EXPORT __attribute__((visibility("default")))
+    #ifdef EXPORT_DYNAMIC
+        #define DFS_EXPORT __attribute__((visibility("default")))
+    #else
+        #define DFS_EXPORT
+    #endif
 #endif

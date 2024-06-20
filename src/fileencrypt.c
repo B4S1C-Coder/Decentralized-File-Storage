@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 #include <sodium.h>
+#include "dfs/fileencrypt.h"
 
 // TO-DO: Implement the function using stream encryption via
 // crypto_secretstream_xchacha20poly1305_<> which is better suited for this purpose
