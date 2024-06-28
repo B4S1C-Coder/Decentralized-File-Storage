@@ -2,7 +2,7 @@ import os
 import ctypes
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 LIB_PATH = os.path.join(ROOT, "build", "dev", "dfs-core-dev-linux-with-python.so")
     
