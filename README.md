@@ -46,7 +46,7 @@ The script will ask some questions along the way for the setup.
   - `python3 -m grpc_tools.protoc -I"protos/" --python_out="dfs_storage_node/" --pyi_out="dfs_storage_node/" --grpc_python_out="dfs_storage_node/" protos/filetransfer.proto` replace "python3" with "python" for Windows.
   - The files would be generated in `dfs_storage_node/` **copy** them to `dfs_user_client/` since the client would also need those files in order to communicate with the storage node.
 
-5. Build external dependencies. Build (sodium)[https://doc.libsodium.org/installation] from source. The static library would be in the `libs/` folder and the dynamic in `build/dev/` and `build/release/`.
+5. Build external dependencies. Build [sodium](https://doc.libsodium.org/installation) from source. The static library would be in the `libs/` folder and the dynamic in `build/dev/` and `build/release/`.
 
 >**Alternate**: If you are on a Debian based distro then, you can install the package `libsodium-dev` via `sudo apt-get install libsodium-dev`. Then you can find the .so and .a files with `find /usr/lib -name "libsodium.so" | head -n 1` and `find /usr/lib -name "libsodium.a" | head -n 1`. Then `cp` the `libsodium.so` to `build/dev/` and `build/release/`, `cp` the `libsodium.a` to `libs/`.
 
