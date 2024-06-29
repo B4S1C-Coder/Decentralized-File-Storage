@@ -5,6 +5,7 @@ dfs_user_client/__pycache__
 dfs_user_client/client_storage
 dfs_tracking_server/__pycache__
 dfs_tracking_server/dfs_tracking_server/__pycache__
+dfs_tracking_server/user_management/__pycache__
 
 debug
 

@@ -33,6 +33,9 @@ pip3 install -r requirements.txt
 
 echo "Re-building _pb2_grpc.py and _pb2.py as a precaution ..."
 python3 -m grpc_tools.protoc -I"protos/" --python_out="dfs_storage_node/" --pyi_out="dfs_storage_node/" --grpc_python_out="dfs_storage_node/" protos/filetransfer.proto
+cp dfs_storage_node/*_pb2.py dfs_user_client/
+cp dfs_storage_node/*_pb2.pyi dfs_user_client/
+cp dfs_storage_node/*_pb2_grpc.py dfs_user_client/
 
 deactivate
 
@@ -49,9 +52,15 @@ if [ "$is_debian_based" = "y" ]; then
         sudo apt-get install libsodium-dev
         echo "Locating libsodium.so ..."
         sodium_path=$(find /usr/lib -name "libsodium.so" | head -n 1)
+        sodium_path_a=$(find /usr/lib -name "libsodium.a" | head -n 1)
         
         if [ -z "$sodium_path" ]; then
             echo "libsodium.so was not found, if installation was unsuccessful consider building from source"
+            exit
+        fi
+
+        if [ -z "$sodium_path_a" ]; then
+            echo "libsodium.a was not found, if installation was unsuccessful consider building from source"
             exit
         fi
 
@@ -59,6 +68,10 @@ if [ "$is_debian_based" = "y" ]; then
         echo "Copying to build directory ..."
         cp $sodium_path "./build/dev/libsodium.so"
         cp $sodium_path "./build/release/libsodium.so"
+
+        echo "Located at: $sodium_path_a"
+        echo "Copying to libs directory ..."
+        cp $sodium_path "./libs/libsodium.a"
 
     elif [ "$sodium_build_choice" = "2" ]; then
         echo "Build sodium from source has currently not been automated."
