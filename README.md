@@ -13,7 +13,7 @@ DFS is a small distributed file storage network which allows the user to split a
 
 The diagram below shows a detailed working of DFS.
 
-![Working](https://github.com/B4S1C-Coder/Decentralized-File-Storage/blob/main/DecentralizedFileStorage.jpg)
+![Working](DecentralizedFileStorage.jpg)
 
 >**Note**: As of now the project is under development and the first prototype will be implemented in python and C/C++ after that everything will likely be converted to C/C++ (or any other compiled language).
 
