@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sodium.h>
 #include <iostream>
+#include <memory>
+#include <cstring>
 #include "stream_encrypt_decrypt.hh"
 
 fsn::StreamEncryptorDecryptor::StreamEncryptorDecryptor(
@@ -42,4 +44,25 @@ void fsn::StreamEncryptorDecryptor::printStatus() {
     std::cout << "m_key is present" << std::endl;
   if (m_nonce)
     std::cout << "nonce is present" << std::endl;
+}
+
+std::pair<std::unique_ptr<unsigned char[]>, size_t> fsn::StreamEncryptorDecryptor::encrypt(
+  std::unique_ptr<unsigned char[]> message, size_t messageLen
+) {
+  std::unique_ptr<unsigned char[]> encrypted = std::make_unique<unsigned char[]>(
+    messageLen + crypto_aead_xchacha20poly1305_ietf_ABYTES);
+
+  unsigned long long encrypted_len; // essentially equal to the length of unsigned char[] above
+
+  // Calculating SHA512 hash of message to server as additional data to enforce integrity
+  unsigned char messageHash[crypto_hash_sha512_BYTES];
+  crypto_hash_sha512(messageHash, message.get(), messageLen);
+
+  crypto_aead_xchacha20poly1305_ietf_encrypt(
+    encrypted.get(), &encrypted_len, message.get(), messageLen,
+    messageHash, sizeof(messageHash), NULL, m_nonce, m_key
+  );
+
+  // std::make_pair was causing some problems with std::unique_ptr<unsigned char[]>
+  return std::pair<std::unique_ptr<unsigned char[]>, size_t>(std::move(encrypted), encrypted_len);
 }
