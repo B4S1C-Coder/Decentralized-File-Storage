@@ -16,7 +16,13 @@ public:
     std::optional<std::pair<std::string, std::string>> keyFileNonceFile = std::nullopt
   );
   void printStatus();
-  std::pair<std::unique_ptr<unsigned char[]>, size_t> encrypt(std::unique_ptr<unsigned char[]> message, size_t messageLen);
+  std::pair<std::unique_ptr<unsigned char[]>, size_t> encrypt(
+    std::unique_ptr<unsigned char[]> message, size_t messageLen
+  );
+  std::optional<std::pair<std::unique_ptr<unsigned char[]>, size_t>> decrypt(
+    std::unique_ptr<unsigned char[]> encrypted, size_t encryptedLen,
+    std::unique_ptr<unsigned char[]> messasgeSHA512Hash, size_t messageLen
+  );
 
 private:
   unsigned char m_nonce[crypto_aead_xchacha20poly1305_ietf_NPUBBYTES];

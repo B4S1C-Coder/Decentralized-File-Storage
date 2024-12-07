@@ -66,3 +66,22 @@ std::pair<std::unique_ptr<unsigned char[]>, size_t> fsn::StreamEncryptorDecrypto
   // std::make_pair was causing some problems with std::unique_ptr<unsigned char[]>
   return std::pair<std::unique_ptr<unsigned char[]>, size_t>(std::move(encrypted), encrypted_len);
 }
+
+std::optional<std::pair<std::unique_ptr<unsigned char[]>, size_t>> fsn::StreamEncryptorDecryptor::decrypt(
+  std::unique_ptr<unsigned char[]> encrypted, size_t encryptedLen,
+  std::unique_ptr<unsigned char[]> messasgeSHA512Hash, size_t messageLen
+) {
+  std::unique_ptr<unsigned char[]> decrypted = std::make_unique<unsigned char[]>(messageLen);
+  unsigned long long decrypted_len;
+
+  if (crypto_aead_xchacha20poly1305_ietf_decrypt(
+    decrypted.get(), &decrypted_len, NULL,
+    encrypted.get(), encryptedLen,
+    messasgeSHA512Hash.get(), crypto_hash_sha512_BYTES,
+    m_nonce, m_key) != 0) {
+      // Message has been forged. Decryption failed.
+      return std::nullopt;
+    }
+  
+  return std::pair<std::unique_ptr<unsigned char[]>, size_t>(std::move(decrypted), decrypted_len);
+}

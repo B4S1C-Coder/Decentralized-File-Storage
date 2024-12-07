@@ -10,19 +10,34 @@ void sed_sandbox() {
   sed.printStatus();
 
   std::unique_ptr<unsigned char[]> message = std::make_unique<unsigned char[]>(13);
+  auto debug_only_message_copy_raw = message.get(); // Used for debugging only, extremely DANGEROUS!
   std::memcpy(message.get(), "Test message", 13);
+
+  std::unique_ptr<unsigned char[]> messageHash = std::make_unique<unsigned char[]>(crypto_hash_sha512_BYTES);
+  crypto_hash_sha512(messageHash.get(), message.get(), 13);
 
   auto result = sed.encrypt(std::move(message), 13); // After this the raw pointer of message is nullptr
   // so message is essentially no longer valid or more precisely just an empty unique_ptr. It should no
   // longer be used after this line.
+  
+  auto decryptionResult = sed.decrypt(std::move(result.first), result.second, std::move(messageHash), 13);
 
-  std::cout << "Ran successfully ... OK!" << std::endl;
-
-  // You shouldn't try to use message now
-  if (!message) {
-    std::cout << "Message is null after move" << std::endl;
+  if (!decryptionResult.has_value()) {
+    std::cout << "Decryption failed." << std::endl;
+    return;
   }
 
+  std::unique_ptr<unsigned char[]> decrypted = std::move(decryptionResult.value().first);
+
+  // Comparing the original and decrypted data
+  if (decryptionResult.value().second == 13 && memcmp(debug_only_message_copy_raw, decrypted.get(), 13) == 0) {
+    std::cout << "Decryption successful, messages match." << std::endl;
+  } else {
+    std::cout << "Decrypted messages do not match." << std::endl;
+    return;
+  }
+
+  std::cout << "Ran successfully ... OK!" << std::endl;
 }
 
 void normalSodiumUsage() {
