@@ -4,6 +4,12 @@
 #include <memory>
 #include <utility>
 #include "stream_encrypt_decrypt.hh"
+#include "sequential_file_splitter.hh"
+
+void sfs_sandbox() {
+  fsn::SequentialFileSplitter sfs("data.txt", 5);
+  sfs.printStatus();
+}
 
 void sed_sandbox() {
   fsn::StreamEncryptorDecryptor sed;
@@ -100,6 +106,7 @@ void normalSodiumUsage() {
 }
 
 int main() {
-  sed_sandbox();
+  // sed_sandbox();
+  sfs_sandbox();
   return 0;
 }

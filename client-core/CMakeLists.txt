@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(scaencryptionlib)
+project(dfsnclientcorelib)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
@@ -9,11 +9,17 @@ pkg_check_modules(LIBSODIUM REQUIRED libsodium)
 
 include_directories(${LIBSODIUM_INCLUDE_DIRS})
 
-# stream_encrypt_decrypt
-add_library(streamencdec src/stream_encrypt_decrypt.cc)
-target_include_directories(streamencdec PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-target_link_libraries(streamencdec ${LIBSODIUM_LIBRARIES})
+# The actual client-core library
+
+set(CLIENTCORE_SOURCES
+  src/stream_encrypt_decrypt.cc
+  src/sequential_file_splitter.cc
+)
+
+add_library(clientcore ${CLIENTCORE_SOURCES})
+target_include_directories(clientcore PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+target_link_libraries(clientcore ${LIBSODIUM_LIBRARIES})
 
 # executable
 add_executable(test src/test.cc)
-target_link_libraries(test streamencdec)
+target_link_libraries(test clientcore)
