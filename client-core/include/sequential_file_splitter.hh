@@ -11,6 +11,7 @@ class SequentialFileSplitter {
 public:
   SequentialFileSplitter(const std::string& filePath, unsigned int numChunks);
   void printStatus();
+  int singleThreadedSplit(const std::string& outputDirPath);
 private:
   std::unique_ptr<std::ifstream> m_currentFile;
   unsigned int m_numChunks;

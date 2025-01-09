@@ -3,12 +3,43 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+#include <fstream>
+#include <vector>
 #include "stream_encrypt_decrypt.hh"
 #include "sequential_file_splitter.hh"
 
 void sfs_sandbox() {
   fsn::SequentialFileSplitter sfs("data.txt", 5);
   sfs.printStatus();
+  sfs.singleThreadedSplit(".");
+}
+
+void reconstruct_compare_unencrypted_chunks(int numChunks) {
+  std::ifstream original("data.txt", std::ios::binary);
+  
+  if (!original.is_open()) {
+    std::cout << "Failed to open input file.\n";
+    return;
+  }
+
+  // Determine size for input buffer
+  original.seekg(0, std::ios::end);
+  size_t originalSize = original.tellg();
+  original.seekg(0, std::ios::beg);
+
+  std::vector<char> inputBuffer(originalSize, 0);
+  original.read(inputBuffer.data(), inputBuffer.size());
+  original.close();
+
+  // Calculating SHA512 hash for input buffer
+  std::vector<char> inputHash(crypto_hash_sha512_BYTES);
+  crypto_hash_sha512(
+    reinterpret_cast<unsigned char*>(inputHash.data()),
+    reinterpret_cast<unsigned char*>(inputBuffer.data()),
+    inputBuffer.size()
+  );
+
+  std::cout << "Input hash calculated.\n";
 }
 
 void sed_sandbox() {
@@ -107,6 +138,7 @@ void normalSodiumUsage() {
 
 int main() {
   // sed_sandbox();
-  sfs_sandbox();
+  // sfs_sandbox();
+  reconstruct_compare_unencrypted_chunks(5);
   return 0;
 }
