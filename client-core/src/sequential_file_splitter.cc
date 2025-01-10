@@ -38,12 +38,15 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
   std::vector<char> buffer(m_bytesPerChunks, 0);
   int chunkCount = 1;
 
-  while (!m_currentFile->eof()) {
+  while (true) {
     m_currentFile->read(buffer.data(), buffer.size());
     std::streamsize dataSize = m_currentFile->gcount();
 
-    std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
+    if (dataSize == 0) {
+      break;
+    }
 
+    std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
     std::ofstream outfile(chunkFileName, std::ios::binary);
     
     if (!outfile.is_open()) {
@@ -54,7 +57,7 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     outfile.write(buffer.data(), buffer.size());
     outfile.close();
 
-    // Encrypt the buffer here
+    // Encrypt the buffer here (ignore for now)
 
     // DEBUG only
     std::cout << dataSize << "\n";

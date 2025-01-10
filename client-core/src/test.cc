@@ -65,7 +65,7 @@ void reconstruct_compare_unencrypted_chunks(int numChunks) {
   std::vector<char> chunksBuffer;
 
   // Reconstructing file from chunks
-  for (int i = 1; i < numChunks; i++) {
+  for (int i = 1; i <= numChunks; i++) {
     std::cout << "Loading chunk " << i << "\n";
     auto chunkDataOpt = loadFileIntoBuffer(std::to_string(i) + ".fsnc");
     if (!chunkDataOpt.has_value()) {
@@ -78,7 +78,22 @@ void reconstruct_compare_unencrypted_chunks(int numChunks) {
 
   // Calculating SHA512 hash for the reconstructed file.
   std::vector<char> outputHash(crypto_hash_sha512_BYTES);
+  crypto_hash_sha512(
+    reinterpret_cast<unsigned char*>(outputHash.data()),
+    reinterpret_cast<unsigned char*>(chunksBuffer.data()),
+    chunksBuffer.size()
+  );
+
+  std::cout << "Output hash calculated.\n";
+
+  // Comparing hashes
+  bool hashesEqual = (sodium_memcmp(inputHash.data(), outputHash.data(), crypto_hash_sha512_BYTES) == 0);
   
+  if (hashesEqual) {
+    std::cout << "Hashes match.\n";
+  } else {
+    std::cout << "Hashes do not match.\n";
+  }
 }
 
 void sed_sandbox() {
@@ -177,7 +192,7 @@ void normalSodiumUsage() {
 
 int main() {
   // sed_sandbox();
-  // sfs_sandbox();
+  sfs_sandbox();
   reconstruct_compare_unencrypted_chunks(5);
   return 0;
 }
