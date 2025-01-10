@@ -5,6 +5,8 @@
 #include <utility>
 #include <fstream>
 #include <vector>
+#include <string>
+#include <optional>
 #include "stream_encrypt_decrypt.hh"
 #include "sequential_file_splitter.hh"
 
@@ -12,6 +14,25 @@ void sfs_sandbox() {
   fsn::SequentialFileSplitter sfs("data.txt", 5);
   sfs.printStatus();
   sfs.singleThreadedSplit(".");
+}
+
+std::optional<std::unique_ptr<std::vector<char>>> loadFileIntoBuffer(const std::string& path) {
+  std::ifstream file(path, std::ios::binary);
+
+  if (!file.is_open()) {
+    std::cout << "Failed to open file: " << path;
+    return std::nullopt;
+  }
+
+  file.seekg(0, std::ios::end);
+  size_t fileSize = file.tellg();
+  file.seekg(0, std::ios::beg);
+
+  std::unique_ptr<std::vector<char>> buffer = std::make_unique<std::vector<char>>(fileSize, 0);
+  file.read(buffer.get()->data(), buffer.get()->size());
+  file.close();
+
+  return buffer;
 }
 
 void reconstruct_compare_unencrypted_chunks(int numChunks) {
@@ -40,6 +61,24 @@ void reconstruct_compare_unencrypted_chunks(int numChunks) {
   );
 
   std::cout << "Input hash calculated.\n";
+
+  std::vector<char> chunksBuffer;
+
+  // Reconstructing file from chunks
+  for (int i = 1; i < numChunks; i++) {
+    std::cout << "Loading chunk " << i << "\n";
+    auto chunkDataOpt = loadFileIntoBuffer(std::to_string(i) + ".fsnc");
+    if (!chunkDataOpt.has_value()) {
+      std::cout << "Failed to load chunk: " << i << "\n";
+      return;
+    }
+    auto chunkData = std::move(chunkDataOpt.value());
+    chunksBuffer.insert(chunksBuffer.end(), chunkData->begin(), chunkData->end());
+  }
+
+  // Calculating SHA512 hash for the reconstructed file.
+  std::vector<char> outputHash(crypto_hash_sha512_BYTES);
+  
 }
 
 void sed_sandbox() {
