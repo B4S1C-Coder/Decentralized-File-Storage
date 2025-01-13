@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <vector>
 #include "sequential_file_splitter.hh"
+#include "util.hh"
+#include "chunk_metadata.hh"
 
 fsn::SequentialFileSplitter::SequentialFileSplitter(const std::string& filePath, unsigned int numChunks)
 : m_numChunks(numChunks), m_bytesInFile(0), m_bytesPerChunks(0), m_currentFilePath(filePath) {
@@ -38,6 +40,8 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
   std::vector<char> buffer(m_bytesPerChunks, 0);
   int chunkCount = 1;
 
+  auto token = std::move(fsn::util::generateRandomToken());
+
   while (true) {
     m_currentFile->read(buffer.data(), buffer.size());
     std::streamsize dataSize = m_currentFile->gcount();
@@ -47,6 +51,19 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     }
 
     std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
+
+    // Calculate hash of the data
+    auto hash = std::move(fsn::util::calculateSHA512Hash(buffer));
+
+    // Construct the metadata for the chunk
+    ChunkMetadata metadata(hash->size() + token->size() + dataSize, *hash, *token);
+    std::vector<char> metedata_bytes = metadata.construct();
+
+    // Create the final buffer to be written (without encryption)
+    std::vector<char> unencrypted_final(metedata_bytes.size() + buffer.size());
+    unencrypted_final.insert(unencrypted_final.end(), metedata_bytes.begin(), metedata_bytes.end());
+    unencrypted_final.insert(unencrypted_final.end(), buffer.begin(), buffer.end());
+
     std::ofstream outfile(chunkFileName, std::ios::binary);
     
     if (!outfile.is_open()) {
@@ -54,7 +71,7 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
       return -1;
     }
 
-    outfile.write(buffer.data(), buffer.size());
+    outfile.write(unencrypted_final.data(), unencrypted_final.size());
     outfile.close();
 
     // Encrypt the buffer here (ignore for now)

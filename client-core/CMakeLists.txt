@@ -14,6 +14,8 @@ include_directories(${LIBSODIUM_INCLUDE_DIRS})
 set(CLIENTCORE_SOURCES
   src/stream_encrypt_decrypt.cc
   src/sequential_file_splitter.cc
+  src/util.cc
+  src/thread_pool.cc
 )
 
 add_library(clientcore ${CLIENTCORE_SOURCES})
@@ -21,5 +23,5 @@ target_include_directories(clientcore PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_S
 target_link_libraries(clientcore ${LIBSODIUM_LIBRARIES})
 
 # executable
-add_executable(test src/test.cc)
+add_executable(test test/test.cc)
 target_link_libraries(test clientcore)

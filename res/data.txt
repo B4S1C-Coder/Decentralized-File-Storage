@@ -1,0 +1,243 @@
+The TGV (French: [teʒeve] ⓘ; train à grande vitesse, [tʁɛ̃ a ɡʁɑ̃d vitɛs] ⓘ, 'high-speed train')[a] is France's intercity high-speed rail service. With commercial operating speeds of up to 320 km/h (200 mph) on the newer lines,[1] the TGV was conceived at the same period as other technological projects such as the Ariane 1 rocket and Concorde supersonic airliner; sponsored by the Government of France, those funding programmes were known as champion national ('national champion') policies. In 2023 the TGV network in France carried 122 million passengers.[2]
+
+The state-owned SNCF started working on a high-speed rail network in 1966. It presented the project to President Georges Pompidou in 1974 who approved it. Originally designed as turbotrains to be powered by gas turbines, TGV prototypes evolved into electric trains with the 1973 oil crisis. In 1976 the SNCF ordered 87 high-speed trains from Alstom. Following the inaugural service between Paris and Lyon in 1981 on the LGV Sud-Est, the network, centred on Paris, has expanded to connect major cities across France, including Marseille, Lille, Bordeaux, Strasbourg, Rennes and Montpellier, as well as in neighbouring countries on a combination of high-speed and conventional lines. The success of the first high-speed service led to a rapid development of lignes à grande vitesse (LGVs, 'high-speed lines') to the south (Rhône-Alpes, Méditerranée, Nîmes–Montpellier), west (Atlantique, Bretagne-Pays de la Loire, Sud Europe Atlantique), north (Nord, Interconnexion Est) and east (Rhin-Rhône, Est). Since it was launched, the TGV has not recorded a single passenger fatality in an accident on normal, high-speed service.
+
+A specially modified TGV high-speed train known as Project V150, weighing only 265 tonnes, set the world record for the fastest wheeled train, reaching 574.8 km/h (357.2 mph) during a test run on 3 April 2007.[3] In 2007, the world's fastest scheduled rail journey was a start-to-stop average speed of 279.4 km/h (173.6 mph) between the Gare de Champagne-Ardenne and Gare de Lorraine on the LGV Est,[4][5] not surpassed until the 2013 reported average of 283.7 km/h (176.3 mph) express service on the Shijiazhuang to Zhengzhou segment of China's Shijiazhuang–Wuhan high-speed railway.[6] During the engineering phase, the transmission voie-machine (TVM) cab-signalling technology was developed, as drivers would not be able to see signals along the track-side when trains reach full speed. It allows for a train engaging in an emergency braking to request within seconds all following trains to reduce their speed; if a driver does not react within 1.5 km (0.93 mi), the system overrides the controls and reduces the train's speed automatically. The TVM safety mechanism enables TGVs using the same line to depart every three minutes.[7][8]
+
+The TGV system itself extends to neighbouring countries, either directly (Italy, Spain, Belgium, Luxembourg and Germany) or through TGV-derivative networks linking France to Switzerland (Lyria), to Belgium, Germany and the Netherlands (former Thalys), as well as to the United Kingdom (Eurostar). Several future lines are under construction or planned, including extensions within France and to surrounding countries. The Mont d'Ambin Base Tunnel, part of the LGV Lyon–Turin that is currently under construction, is set to become the longest rail tunnel in the world. Cities such as Tours and Le Mans have become part of a "TGV commuter belt" around Paris; the TGV also serves Charles de Gaulle Airport and Lyon–Saint-Exupéry Airport. A visitor attraction in itself, it stops at Disneyland Paris and in southern tourist cities such as Avignon and Aix-en-Provence as well. Brest, Chambéry, Nice, Toulouse and Biarritz are reachable by TGVs running on a mix of LGVs and modernised lines. In 2007, the SNCF generated profits of €1.1 billion (approximately US$1.75 billion, £875 million) driven largely by higher margins on the TGV network.[9][10]
+
+History
+The idea of the TGV was first proposed in the 1960s, after Japan had begun construction of the Shinkansen in 1959. At the time the Government of France favoured new technology, exploring the production of hovercraft and the Aérotrain air-cushion vehicle. Simultaneously, the SNCF began researching high-speed trains on conventional tracks. In 1976, the administration agreed to fund the first line. By the mid-1990s, the trains were so popular that SNCF president Louis Gallois declared that the TGV was "the train that saved French railways".[11]
+
+Development
+Main article: Development of the TGV
+
+Europe's high-speed rail system, including TGV lines in France
+
+TGV Sud-Est (left), the first equipment used on the service; and TGV 2N2 (right), the newest equipment used on the service, at Gare de Lyon, 2019
+It was originally planned that the TGV, then standing for très grande vitesse ('very high speed') or turbine grande vitesse ('high-speed turbine'), would be propelled by gas turbines, selected for their small size, good power-to-weight ratio and ability to deliver high power over an extended period. The first prototype, TGV 001, was the only gas-turbine TGV: following the increase in the price of oil during the 1973 energy crisis, gas turbines were deemed uneconomic and the project turned to electricity from overhead lines, generated by new nuclear power stations.
+
+TGV 001 was not a wasted prototype:[12] its gas turbine was only one of its many new technologies for high-speed rail travel. It also tested high-speed brakes, needed to dissipate the large amount of kinetic energy of a train at high speed, high-speed aerodynamics, and signalling. It was articulated, comprising two adjacent carriages sharing a bogie, allowing free yet controlled motion with respect to one another. It reached 318 km/h (198 mph), which remains the world speed record for a non-electric train. Its interior and exterior were styled by French designer Jacques Cooper, whose work formed the basis of early TGV designs, including the distinctive nose shape of the first power cars.
+
+Changing the TGV to electric traction required a significant design overhaul. The first electric prototype, nicknamed Zébulon, was completed in 1974, testing features such as innovative body mounting of motors, pantographs, suspension and braking. Body mounting of motors allowed over 3 tonnes to be eliminated from the power cars and greatly reduced the unsprung weight. The prototype travelled almost 1,000,000 km (621,371 mi) during testing.
+
+In 1976, the French administration funded the TGV project, and construction of the LGV Sud-Est, the first high-speed line (French: ligne à grande vitesse), began shortly afterwards. The line was given the designation LN1, Ligne Nouvelle 1 ('New Line 1'). After two pre-production trainsets (nicknamed Patrick and Sophie) had been tested and substantially modified, the first production version was delivered on 25 April 1980.
+
+Service
+Main article: List of TGV services
+
+TGV Duplex, seen on the LGV Rhin-Rhône in Héricourt, Haute-Saône. This service between Strasbourg and Montpellier runs on both high-speed and classic lines.
+
+TGV Duplex departing Nice on the Marseille–Ventimiglia railway. The service towards the north runs on the classic line until Marseille, when it joins the LGV Méditerranée. The proposed LGV PACA allows for extending the high-speed service to Nice.
+
+TGV service (partly on classic lines) to Modane in the French Alps is popular in the winter season.
+The TGV opened to the public between Paris and Lyon on 27 September 1981. Contrary to its earlier fast services, SNCF intended TGV service for all types of passengers, with the same initial ticket price as trains on the parallel conventional line. To counteract the popular misconception that the TGV would be a premium service for business travellers, SNCF started a major publicity campaign focusing on the speed, frequency, reservation policy, normal price, and broad accessibility of the service.[13] This commitment to a democratised TGV service was enhanced in the Mitterrand era with the promotional slogan "Progress means nothing unless it is shared by all".[14] The TGV was considerably faster (in terms of door to door travel time) than normal trains, cars, or aeroplanes. The trains became widely popular, the public welcoming fast and practical travel.
+
+The Eurostar service began operation in 1994, connecting continental Europe to London via the Channel Tunnel and the LGV Nord-Europe with a version of the TGV designed for use in the tunnel and the United Kingdom. The first phase of the British High Speed 1 line was completed in 2003, the second phase in November 2007. The fastest trains take 2 hours 15 minutes London–Paris and 1 hour 51 minutes London–Brussels. The first twice-daily London-Amsterdam service ran 3 April 2018, and took 3 hours 47 minutes.[15]
+
+Milestones
+
+Record runs of the TGV
+The TGV (1981) was the world's second commercial and the fastest standard gauge high-speed train service,[16] after Japan's Shinkansen, which connected Tokyo and Osaka from 1 October 1964. It was a commercial success.
+
+A TGV test train holds the world speed record for conventional trains. On 3 April 2007 a modified TGV POS train reached 574.8 km/h (357.2 mph) under test conditions on the LGV Est between Paris and Strasbourg. The line voltage was boosted to 31 kV, and extra ballast was tamped onto the permanent way. The train beat the 1990 world speed record of 515.3 km/h (320.2 mph), set by a similarly TGV, along with unofficial records set during weeks preceding the official record run. The test was part of an extensive research programme by Alstom.[17][18]
+
+In 2007, the TGV was the world's fastest conventional scheduled train: one journey's average start-to-stop speed from Champagne-Ardenne Station to Lorraine Station is 279.3 km/h (173.5 mph).[4][5] This record was surpassed on 26 December 2009 by the new Wuhan–Guangzhou high-speed railway[19] in China where the fastest scheduled train covered 922 km (573 mi) at an average speed of 312.54 km/h (194.20 mph).[20]
+
+A Eurostar (TGV) train broke the record for the longest non-stop high-speed international journey on 17 May 2006 carrying the cast and filmmakers of The Da Vinci Code from London to Cannes for the Cannes Film Festival. The 1,421-kilometre (883 mi) journey took 7 hours 25 minutes on an average speed of 191.6 km/h (119.1 mph).[21]
+
+The fastest single long-distance run on the TGV was done by a TGV Réseau train from Calais-Frethun to Marseille (1,067.2 km (663.1 mi)i) in 3 hours 29 minutes at a speed of 306 km/h (190 mph) for the inauguration of the LGV Méditerranée on 26 May 2001.[22]
+
+Passenger usage
+On 28 November 2003, the TGV network carried its one billionth passenger, a distant second only to the Shinkansen's five billionth passenger in 2000.
+
+Excluding international traffic, the TGV system carried 98 million passengers during 2008, an increase of 8 million (9.1%) on the previous year.[23]
+
+TGV passengers in millions from 1981 to 2010[24][t 1][t 2]
+1980	1981	1982	1983	1984	1985	1986	1987	1988	1989
+–
+1.26	6.08	9.20	13.77	15.38	15.57	16.97	18.10	19.16
+1990	1991	1992	1993	1994	1995	1996	1997	1998	1999
+29.93	37.00	39.30	40.12	43.91	46.59	55.73	62.60	71.00	74.00
+2000	2001	2002	2003	2004	2005	2006	2007	2008	2009
+79.70	83.50	87.90	86.70	90.80	94.00	97.00	106.00	114.00	122.00
+2010
+114.45
+ from 1994 including Eurostar
+ from 1997 including Thalys
+
+Graphs are unavailable due to technical issues. Updates on reimplementing the Graph extension, which will be known as the Chart extension, can be found on Phabricator and on MediaWiki.org.
+Rolling stock
+
+Three TGV trains at Gare de Lyon station in Paris, 1985
+All TGV trains have two power cars, one on each end. Between those power cars are a set of semi-permanently coupled articulated un-powered coaches. Cars are connected with Jacobs bogies, a single bogie shared between the ends of two coaches. The only exception are the end cars, which have a standalone bogie on the side closest to the power car, which is often motorized. Power cars also have two bogies.
+
+Trains can be lengthened by coupling two TGVs, using couplers hidden in the noses of the power cars.
+
+The articulated design is advantageous during a derailment, as the passenger carriages are more likely to stay upright and in line with the track. Normal trains could split at couplings and jackknife, as seen in the Eschede train disaster. A disadvantage is that it is difficult to split sets of carriages. While power cars can be removed from trains by standard uncoupling procedures, specialized equipment is needed to split carriages, by lifting up cars off a bogie. Once uncoupled, one of the carriage ends is left without support, so a specialized frame is required.
+
+SNCF prefers to use power cars instead of electric multiple units because it allows for less electrical equipment.[25]
+
+There are six types of TGV equipment in use, all built by Alstom:
+
+TGV Atlantique (10 carriages)
+TGV Réseau (an upgrade of the Atlantique, 8 carriages)
+TGV Duplex (two floors for greater passenger capacity)
+TGV POS (originally for routes to Germany, now used to Switzerland)
+TGV 2N2 (also known as the Avelia Euroduplex, an upgrade of the TGV Duplex)
+TGV M (also known as the Avelia Horizon, expected to enter service in 2025)
+Retired sets:
+
+TGV Sud-Est (retired in December 2019)
+TGV La Poste (retired in June 2015)
+Several TGV types have broken records, including the V150 and TGV 001. V150 was a specially modified five-car double-deck trainset that reached 574.8 km/h (357.2 mph) under controlled conditions on a test run. It narrowly missed beating the world train speed record of 581 km/h (361 mph).[26] The record-breaking speed is impractical for commercial trains due to motor overcharging, empty train weight, rail and engine wear issues, elimination of all but three coaches, excessive vibration, noise and lack of emergency stopping methods. TGVs travel at up to 320 km/h (199 mph) in commercial use.
+
+All TGVs are at least bi-current, which means that they can operate at 25 kV 50 Hz AC (used on LGVs) and 1,500 V DC (used on traditional lines). Trains travelling internationally must accommodate other voltages (15 kV  16.7 Hz AC or 3,000 V DC), requiring tri-current and quad-current TGVs.
+
+Each TGV power car has two pantographs: one for AC use and one for DC. When passing between areas with different electric systems (identified by marker boards), trains enter a phase break zone. Just before this section, train operators must power down the motors (allowing the train to coast), lower the pantograph, adjust a switch to select the appropriate system, and raise the pantograph. Once the train exits the phase break zone and detects the correct electric supply, a dashboard indicator illuminates, and the operator can once again engage the motors.
+
+Equipment type	Top speed	Seating
+capacity	Overall length	Width	Weight,
+empty (t)	Weight,
+full (t)	Power,
+at 25 kV (kW)	Power-to-weight ratio,
+empty (kW/t)	First
+built
+km/h	mph	m	ft	m	ft
+TGV Atlantique	300	190	485, 459 (rebuilt)	238	781	2.90	9.5	444	484	8,800	19.82	1988
+TGV Réseau	320	200	377, 361 (rebuilt)	200	660	2.90	9.5	383	415	8,800	22.98	1992
+TGV Duplex	320	200	508	200	660	2.90	9.5	380	424	8,800	23.16	1994
+TGV POS	320	200	361	200	660	2.90	9.5	383	415	9,280	24.23	2005
+Euroduplex	320	200	509(SNCF), 533(ONCF)	200	660	2.90	9.5	380	424	9,400	24.74	2011
+TGV Sud-Est
+Main articles: SNCF TGV Sud-Est and SNCF TGV La Poste
+
+A TGV Sud-Est set in the original orange livery.
+The Sud-Est fleet was built between 1978 and 1988 and operated the first TGV service, from Paris to Lyon in 1981. There were 107 passenger sets, of which nine are tri-current (including 15 kV  16.7 Hz AC for use in Switzerland) and the rest bi-current. There were seven bi-current half-sets without seats that carried mail for La Poste between Paris, Lyon and Provence, in a distinctive yellow livery until they were phased out in 2015.
+
+Each set were made up of two power cars and eight carriages (capacity 345 seats), including a powered bogie in the carriages adjacent to the power cars. They are 200 m (656 ft 2 in) long and 2.81 m (9 ft 3 in) wide. They weighed 385 tonnes (849,000 lb) with a power output of 6,450 kW under 25 kV.
+
+The sets were originally built to run at 270 km/h (168 mph) but most were upgraded to 300 km/h (186 mph) during mid-life refurbishment in preparation for the opening of the LGV Méditerranée. The few sets that kept a maximum speed of 270 km/h (168 mph) operated on routes that include a comparatively short distance on LGV, such as to Switzerland via Dijon; SNCF did not consider it financially worthwhile to upgrade their speed for a marginal reduction in journey time.
+
+In December 2019, the trains were phased out from service. In late 2019 and early 2020, TGV 01 (Nicknamed Patrick), the very first TGV train, did a farewell service that included all three liveries that were worn during their service.[27]
+
+TGV Atlantique
+Main article: SNCF TGV Atlantique
+
+TGV Atlantique at La Rochelle station
+The 105 train Atlantique fleet was built between 1988 and 1992 for the opening of the LGV Atlantique and entry into service began in 1989. They are all bi-current, 237.5 m (779 ft 2 in) long and 2.9 m (9 ft 6 in) wide. They weigh 444 tonnes (979,000 lb) and are made up of two power cars and ten carriages with a capacity of 485 seats. They were built with a maximum speed of 300 km/h (186 mph) and 8,800 kW of power under 25 kV. The efficiency of the Atlantique with all seats filled has been calculated at 767 PMPG, though with a typical occupancy of 60% it is about 460 PMPG (a Toyota Prius with three passengers is 144 PMPG).[28]
+
+Modified unit 325 set the world speed record in 1990 on the LGV Atlantique before its opening. Modifications such as improved aerodynamics, larger wheels and improved braking were made to enable speeds of over 500 km/h (311 mph). The set was reduced to two power cars and three carriages to improve the power-to-weight ratio, weighing 250 tonnes. Three carriages, including the bar carriage in the centre, is the minimum possible configuration because of the Jacobs bogies.
+
+TGV Réseau
+Main article: SNCF TGV Réseau
+
+A TGV-Reseau Lacroix with number 549 at the Luxembourg station
+The first Réseau (Network) sets entered service in 1993. Fifty bi-current sets were ordered in 1990, supplemented by 40 tri-current sets in 1992/1993 (adding 3,000 V DC system used on traditional lines in Belgum). Ten tri-current sets carry the Eurostar Red (ex-Thalys) livery and are known as the PBA (Paris-Brussels-Amsterdam) sets.
+
+They are formed of two power cars (8,800 kW under 25 kV – as TGV Atlantique) and eight carriages, giving a capacity of 377 seats. They have a top speed of 320 km/h (199 mph). They are 200 m (656 ft 2 in) long and are 2.90 m (9 ft 6 in) wide. The bi-current sets weigh 383 tonnes: owing to axle-load restrictions in Belgium the tri-current sets have a series of modifications, such as the replacement of steel with aluminum and hollow axles, to reduce the weight to under 17 t per axle.
+
+Owing to early complaints of uncomfortable pressure changes when entering tunnels at high speed on the LGV Atlantique, the Réseau sets are now pressure-sealed. They can be coupled to a Duplex set.
+
+TGV Duplex
+Main article: TGV Duplex
+
+The TGV Duplex power cars use a more streamlined nose than previous TGVs.
+The Duplex was built to increase TGV capacity without increasing train length or the number of trains. Each carriage has two levels, with access doors at the lower level taking advantage of low French platforms. A staircase gives access to the upper level, where the gangway between carriages is located. There are 512 seats per set. On busy routes such as Paris-Marseille they are operated in pairs, providing 1,024 seats in two Duplex sets or 800 in a Duplex set plus a Reseau set. Each set has a wheelchair accessible compartment.
+
+After a lengthy development process starting in 1988 (during which they were known as the TGV-2N) the original batch of 30 was built between 1995 and 1998. Further deliveries started in 2000 with the Duplex fleet now totaling 160 units, making it the backbone of the SNCF TGV-fleet. They weigh 380 tonnes and are 200 m (656 ft 2 in) long, made up of two power cars and eight carriages. Extensive use of aluminum means that they weigh not much more than the TGV Réseau sets they supplement. The bi-current power cars provide 8,800 kW, and they have a slightly increased speed of 320 km/h (199 mph).
+
+Duplex TGVs run on all of French high-speed lines.[29]
+
+TGV POS
+Main article: TGV POS
+
+TGV POS have the newer power cars unlike a TGV Réseau.
+TGV POS (Paris-Ostfrankreich-Süddeutschland or Paris-Eastern France-Southern Germany) are used on the LGV Est.
+
+They consist of two Duplex power cars with eight TGV Réseau-type carriages, with a power output of 9,600 kW and a top speed of 320 km/h (199 mph). Unlike TGV-A, TGV-R and TGV-D, they have asynchronous motors, and isolation of an individual motor is possible in case of failure.
+
+Avelia Euroduplex (TGV 2N2)
+Main article: Euroduplex
+
+TGV 2N2 train in Paris Gare de Lyon station
+The bi-current TGV 2N2 (Avelia Euroduplex) can be regarded as the 3rd generation of Duplex. The series was commissioned from December 2011 for links to Germany and Switzerland (tri-current trains) and to cope with the increased traffic due to the opening of the LGV Rhine-Rhone.
+
+They are numbered from 800 and are limited to 320 km/h (199 mph). ERTMS makes them compatible to allow access to Spain similar to Dasye.
+
+TGV M Avelia Horizon
+Main article: SNCF TGV M
+The design that emerged from the process was named TGV M, and in July 2018 SNCF ordered 100 trainsets with deliveries expected to begin in 2024.[30] They are expected to cost €25 million per 8-car set.
+
+TGV technology outside France
+TGV technology has been adopted in a number of other countries:[31]
+
+AVE (Alta Velocidad Española) in Spain with the Renfe Class 100 based on the TGV Atlantique.[32]
+Eurostar operates international high-speed services connecting France with Belgium, Germany and the Netherlands. Several trainsets use TGV technology (e300, PBA, PBKA).
+Korea Train Express (KTX) in South Korea with KTX-I (based on the TGV Réseau) and KTX-Sancheon.[33]
+Acela Express, a high-speed tilting train built by Alstom and Bombardier for the Northeast Corridor in the United States. The Acela power cars use several TGV technologies including the motors, electrical/drivetrain system (rectifiers, inverters, regenerative braking technology), and disc brakes. However, they are strengthened to meet U.S. Federal Railroad Administration crash standards.[34] The Acela's tilting, non-articulated carriages are derived from the Bombardier's LRC train and also meet crash standards.[34]
+Avelia Liberty, the replacement for the Acela Express in the United States. Expected to enter service in 2023.
+The Moroccan government agreed to a €2 billion contract for Alstom to build Al-Boraq, an LGV between Tangier and Casablanca which opened in 2018 using TGV Euroduplex.[35]
+Italian open-access high-speed operator Nuovo Trasporto Viaggiatori signed up with Alstom to purchase 25 AGV 11-car sets.[36]
+Future TGVs
+SNCF and Alstom are investigating new technology that could be used for high-speed transport. The development of TGV trains is being pursued in the form of the Automotrice à grande vitesse (AGV) high-speed multiple unit with motors under each carriage.[37] Investigations are being carried out with the aim of producing trains at the same cost as TGVs with the same safety standards. AGVs of the same length as TGVs could have up to 450 seats. The target speed is 360 kilometres per hour (224 mph). The prototype AGV was unveiled by Alstom on 5 February 2008.[38]
+
+Italian operator NTV is the first customer for the AGV, and became the first open-access high-speed rail operator in Europe, starting operation in 2011.[36]
+
+The design process of the next generation of TGVs began in 2016 when SNCF and Alstom signed an agreement to jointly develop the trainsets, with goals of reducing purchase and operating costs, as well as improved interior design.[39]
+
+Lines in operation
+Main article: High-speed rail in France § Network
+In June 2021, there were approximately 2,800 km (1,740 mi) of Lignes à Grande Vitesse (LGV), with four additional line sections under construction. The current lines and those under construction can be grouped into four routes radiating from Paris.
+
+Accidents
+Main article: TGV accidents
+In over three decades of operation, the TGV has not recorded a single passenger fatality in an accident on normal, high-speed service. There have been several accidents, including four derailments at or above 270 km/h (168 mph), but in only one of these—a test run on a new line—did carriages overturn.
+
+This safety record is credited in part to the stiffness that the articulated design lends to the train. There have been fatal accidents involving TGVs on lignes classiques, where the trains are exposed to the same dangers as normal trains, such as level crossings. These include one terrorist bombing unrelated to the speed at which the train was traveling.
+
+On LGVs
+14 December 1992: TGV 920 from Annecy to Paris, operated by set 56, derailed at 270 km/h (168 mph) at Mâcon-Loché TGV station (Saône-et-Loire). A previous emergency stop had caused a wheel flat; the bogie concerned derailed while crossing the points at the entrance to the station. No one on the train was injured, but 25 passengers waiting on the platform for another TGV were slightly injured by ballast that was thrown up from the trackbed.
+21 December 1993: TGV 7150 from Valenciennes to Paris, operated by set 511, derailed at 300 km/h (186 mph) at the site of Haute Picardie TGV station, before it was built. Rain had caused a hole to open up under the track; the hole dated from the First World War but had not been detected during construction. The front power car and four carriages derailed but remained aligned with the track. Of the 200 passengers, one was slightly injured.
+5 June 2000: Eurostar 9073 from Paris to London, operated by sets 3101/2 owned by the National Railway Company of Belgium, derailed at 250 km/h (155 mph) in the Nord-Pas de Calais region near Croisilles.[40] The transmission assembly on the rear bogie of the front power car failed, with parts falling onto the track. Four bogies out of 24 derailed. Out of 501 passengers, seven were bruised[41] and others treated for shock.[42]
+14 November 2015: TGV 2369 was involved in the Eckwersheim derailment, near Strasbourg, while being tested on the then-unopened second phase of the LGV Est. The derailment resulted in 11 deaths among those aboard, while 11 others aboard the train were seriously injured.[43] Excessive speed has been cited as the cause.[44]
+On classic lines
+31 December 1983: A bomb allegedly planted by the terrorist organisation of Carlos the Jackal exploded on board a TGV from Marseille to Paris; two people were killed.
+28 September 1988: TGV 736, operated by set 70 "Melun", collided with a lorry carrying an electric transformer weighing 100 tonnes that had become stuck on a level crossing in Voiron, Isère. The vehicle had not obtained the required crossing permit from the French Direction départementale de l'équipement. The weight of the lorry caused a very violent collision; the train driver and a passenger died, and 25 passengers were slightly injured.
+4 January 1991: after a brake failure, TGV 360 ran away from Châtillon depot. The train was directed onto an unoccupied track and collided with the car loading ramp at Paris-Vaugirard station at 60 km/h (37 mph). No one was injured. The leading power car and the first two carriages were severely damaged, and were rebuilt.
+25 September 1997: TGV 7119 from Paris to Dunkerque, operated by set 502, collided at 130 km/h (81 mph) with a 70 tonne asphalt paving machine on a level crossing at Bierne, near Dunkerque. The power car spun round and fell down an embankment. The front two carriages left the track and came to a stop in woods beside the track. Seven people were injured.
+31 October 2001: TGV 8515 from Paris to Irun derailed at 130 km/h (81 mph) near Dax in southwest France. All ten carriages derailed and the rear power unit fell over. The cause was a broken rail.
+30 January 2003: a TGV from Dunkerque to Paris collided at 106 km/h (66 mph) with a heavy goods vehicle stuck on the level crossing at Esquelbecq in northern France. The front power car was severely damaged, but only one bogie derailed. Only the driver was slightly injured.
+19 December 2007: a TGV from Paris to Geneva collided at about 100 km/h (62 mph) with a truck on a level crossing near Tossiat in eastern France, near the Swiss border. The driver of the truck died; on the train, one person was seriously injured and 24 were slightly injured.[45]
+17 July 2014: a TER train ran into the rear of a TGV at Denguin, Pyrénées-Atlantiques. Forty people were injured.
+Following the number of accidents at level crossings, an effort has been made to remove all level crossings on lignes classiques used by TGVs. The ligne classique from Tours to Bordeaux at the end of the LGV Atlantique has no level crossings as a result.
+
+Protests against the TGV
+The first environmental protests against the building of an LGV occurred in May 1990 during the planning stages of the LGV Méditerranée. Protesters blocked a railway viaduct to protest against the planned route, arguing that it was unnecessary, and that trains could keep using existing lines to reach Marseille from Lyon.[46]
+
+The Turin–Lyon high-speed railway (Lyon-Chambéry-Turin), which would connect the TGV network to the Italian TAV network, has been the subject of demonstrations in Italy. While most Italian political parties agree on the construction of this line, some inhabitants of the towns where construction would take place oppose it vehemently.[citation needed] The concerns put forward by the protesters centre on storage of dangerous materials mined during tunnel boring, like asbestos and perhaps uranium, in the open air.[citation needed] This health danger could be avoided by using more expensive techniques for handling radioactive materials.[citation needed] A six-month delay in the start of construction has been decided in order to study solutions. In addition to the concerns of the residents, RFB – a ten-year-old national movement – opposes the development of Italy's TAV high-speed rail network as a whole.[47]
+
+General complaints about the noise of TGVs passing near towns and villages have led the SNCF to build acoustic fencing along large sections of LGV to reduce the disturbance to residents, but protests still take place where SNCF has not addressed the issue.[48]
+
+On July 26 2024, the opening day of the 2024 Olympics, the TGV was hit by an arson attack. At least 800,000 people were affected by this. The Eurostar was specifically hit by this with 25% of trains canceled.
+
+Mail services
+In addition to its standard services, mail delivery services were also operated by TGVs.
+
+For many years, a service termed SNCF TGV La Poste transported mail for the French mail service, La Poste. It used windowless but otherwise standard TGV rolling stock, painted in the yellow and blue livery of La Poste. However, the service ceased in June 2015.
+
+Mobile hospital service
+During the COVID-19 pandemic, several TGV trains were transformed into mobile hospitals, in order to transport critically ill patients from overwhelmed hospitals in the East of France to hospitals in the West.[49]
+
+Every coach allowed for up to 6 patients, allowing for the transport of several dozen patients, attended by a staff of 50 medical workers. Although the train moves at high speed, it accelerates and decelerates smoothly, allowing for medical procedures to be performed during transport.[50]
+
+Rebranding
+Since July 2017, TGV services are gradually being rebranded as TGV inOui and Ouigo in preparation for the opening of the French HSR market to competition.[51][52][53]
+
+TGV inOui
+Main article: TGV inOui
+TGV inOui is SNCF's premium high-speed rail service. The name inOui was chosen because it sounds like the French word inouï meaning "extraordinary" (or more literally, "unheard of").[54]
+
+Ouigo
+Main article: Ouigo
+Ouigo is SNCF's low-cost high-speed rail service. Trains have a high-density one-class configuration and reduced on-board services. The services traditionally operate from less busy secondary stations, sometimes outside of the city centre.[55] The literal translation of the brand name is "yes go", but the name is also a play on the English homonym, "we go".

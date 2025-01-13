@@ -9,9 +9,12 @@
 #include <optional>
 #include "stream_encrypt_decrypt.hh"
 #include "sequential_file_splitter.hh"
+#include "chunk_metadata.hh"
+
+const std::string dataFilePath = "../res/data.txt";
 
 void sfs_sandbox() {
-  fsn::SequentialFileSplitter sfs("data.txt", 5);
+  fsn::SequentialFileSplitter sfs(dataFilePath, 5);
   sfs.printStatus();
   sfs.singleThreadedSplit(".");
 }
@@ -36,7 +39,7 @@ std::optional<std::unique_ptr<std::vector<char>>> loadFileIntoBuffer(const std::
 }
 
 void reconstruct_compare_unencrypted_chunks(int numChunks) {
-  std::ifstream original("data.txt", std::ios::binary);
+  std::ifstream original(dataFilePath, std::ios::binary);
   
   if (!original.is_open()) {
     std::cout << "Failed to open input file.\n";
