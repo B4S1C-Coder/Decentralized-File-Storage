@@ -37,18 +37,24 @@ void fsn::SequentialFileSplitter::printStatus() {
 }
 
 int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDirPath) {
-  std::vector<char> buffer(m_bytesPerChunks, 0);
+  // std::vector<char> buffer(m_bytesPerChunks);
+  std::vector<char> buffer;
+  buffer.reserve(m_bytesPerChunks);
   int chunkCount = 1;
 
   auto token = std::move(fsn::util::generateRandomToken());
 
   while (true) {
-    m_currentFile->read(buffer.data(), buffer.size());
+    buffer.resize(m_bytesPerChunks);
+    // m_currentFile->read(buffer.data(), buffer.size());
+    m_currentFile->read(buffer.data(), m_bytesPerChunks);
     std::streamsize dataSize = m_currentFile->gcount();
 
     if (dataSize == 0) {
       break;
     }
+
+    buffer.resize(dataSize);
 
     std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
 
@@ -60,7 +66,9 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     std::vector<char> metedata_bytes = metadata.construct();
 
     // Create the final buffer to be written (without encryption)
-    std::vector<char> unencrypted_final(metedata_bytes.size() + buffer.size());
+    // std::vector<char> unencrypted_final(metedata_bytes.size() + buffer.size());
+    std::vector<char> unencrypted_final;
+    unencrypted_final.reserve(metedata_bytes.size() + buffer.size());
     unencrypted_final.insert(unencrypted_final.end(), metedata_bytes.begin(), metedata_bytes.end());
     unencrypted_final.insert(unencrypted_final.end(), buffer.begin(), buffer.end());
 

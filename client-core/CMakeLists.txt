@@ -24,4 +24,6 @@ target_link_libraries(clientcore ${LIBSODIUM_LIBRARIES})
 
 # executable
 add_executable(test test/test.cc)
+add_executable(test_reconst_unenc test/test_file_reconst_unenc.cc)
 target_link_libraries(test clientcore)
+target_link_libraries(test_reconst_unenc clientcore)
