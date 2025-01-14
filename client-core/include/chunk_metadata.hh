@@ -16,7 +16,8 @@ public:
 
   std::vector<char> construct() {
     
-    std::vector<char> metadata(m_hash.size() + m_token.size() + sizeof(size_t));
+    std::vector<char> metadata;
+    metadata.reserve(m_hash.size() + m_token.size() + sizeof(size_t));
 
     metadata.insert(metadata.end(), m_hash.begin(), m_hash.end());
     metadata.insert(metadata.end(), m_token.begin(), m_token.end());

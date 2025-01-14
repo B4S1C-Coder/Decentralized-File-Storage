@@ -42,7 +42,8 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
   buffer.reserve(m_bytesPerChunks);
   int chunkCount = 1;
 
-  auto token = std::move(fsn::util::generateRandomToken());
+  // auto token = std::move(fsn::util::generateRandomToken());
+  std::vector<char> token = fsn::util::primitive_generateRandomToken();
 
   while (true) {
     buffer.resize(m_bytesPerChunks);
@@ -59,10 +60,12 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
 
     // Calculate hash of the data
-    auto hash = std::move(fsn::util::calculateSHA512Hash(buffer));
+    // auto hash = std::move(fsn::util::calculateSHA512Hash(buffer));
+    std::vector<char> hash = fsn::util::primitive_calculateSHA512Hash(buffer);
 
     // Construct the metadata for the chunk
-    ChunkMetadata metadata(hash->size() + token->size() + dataSize, *hash, *token);
+    // ChunkMetadata metadata(hash->size() + token->size() + dataSize, *hash, *token);
+    ChunkMetadata metadata(hash.size() + token.size() + dataSize, hash, token);
     std::vector<char> metedata_bytes = metadata.construct();
 
     // Create the final buffer to be written (without encryption)
