@@ -40,6 +40,7 @@ std::unique_ptr<std::vector<char>> fsn::util::calculateSHA512Hash(std::vector<ch
 std::vector<char> fsn::util::primitive_calculateSHA512Hash(std::vector<char>& inputBuffer) {
   std::vector<char> hashBuffer;
   hashBuffer.reserve(crypto_hash_sha512_BYTES);
+  hashBuffer.resize(crypto_hash_sha512_BYTES);
 
   crypto_hash_sha512(
     reinterpret_cast<unsigned char*>(hashBuffer.data()),
@@ -59,6 +60,7 @@ std::unique_ptr<std::vector<char>> fsn::util::generateRandomToken() {
 std::vector<char> fsn::util::primitive_generateRandomToken() {
   std::vector<char> token;
   token.reserve(32);
+  token.resize(32);
   randombytes_buf(reinterpret_cast<unsigned char*>(token.data()), 32);
   return token;
 }

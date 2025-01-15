@@ -196,6 +196,6 @@ void normalSodiumUsage() {
 int main() {
   // sed_sandbox();
   sfs_sandbox();
-  reconstruct_compare_unencrypted_chunks(5);
+  // reconstruct_compare_unencrypted_chunks(5);
   return 0;
 }

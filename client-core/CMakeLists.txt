@@ -16,6 +16,7 @@ set(CLIENTCORE_SOURCES
   src/sequential_file_splitter.cc
   src/util.cc
   src/thread_pool.cc
+  src/diagnostics.cc
 )
 
 add_library(clientcore ${CLIENTCORE_SOURCES})
