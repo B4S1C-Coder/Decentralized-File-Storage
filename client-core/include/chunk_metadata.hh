@@ -30,22 +30,20 @@ public:
     return metadata;
   }
 
-  static std::pair<std::unique_ptr<std::ifstream>, ChunkMetadata> loadFromFile(
-    std::unique_ptr<std::ifstream> _if, const size_t hashLen, const size_t tokenLen
+  static ChunkMetadata loadFromFile(
+    std::ifstream& _if, const size_t hashLen, const size_t tokenLen
   ) {
 
     std::vector<char> hash(hashLen);
-    _if->read(hash.data(), hash.size());
+    _if.read(hash.data(), hash.size());
 
     std::vector<char> token(tokenLen);
-    _if->read(token.data(), token.size());
+    _if.read(token.data(), token.size());
 
     size_t dataEnd;
-    _if->read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
+    _if.read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
 
-    std::pair<std::unique_ptr<std::ifstream>, ChunkMetadata> p = std::make_pair(
-      std::move(_if), ChunkMetadata(dataEnd, hash, token));
-    return p;
+    return ChunkMetadata(dataEnd, hash, token);
   }
 
   size_t getDataEnd() const { return m_dataEnd;  }

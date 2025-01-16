@@ -5,6 +5,7 @@
 #include "chunk_metadata.hh"
 #include "sequential_file_splitter.hh"
 #include "util.hh"
+#include "diagnostics.hh"
 
 std::string dataFilePath = "../res/data.txt";
 const size_t tokenLength = 32;
@@ -15,21 +16,22 @@ void hardCodedReconstruct() {
   // the metadata and ensuring that metadata was correctly written and can be correctly loaded and parsed.
 
   // This is the manual recombiniation.
+  std::ifstream chunkFile("1.fsnc", std::ios::binary);
 
-  std::unique_ptr<std::ifstream> chunkFile = std::make_unique<std::ifstream>("1.fsnc", std::ios::binary);
-  
-  auto metadataLoadingResultPair = fsn::ChunkMetadata::loadFromFile(
-    std::move(chunkFile), crypto_hash_sha512_BYTES, tokenLength
+  fsn::ChunkMetadata chunkMetadata = fsn::ChunkMetadata::loadFromFile(
+    chunkFile, crypto_hash_sha512_BYTES, tokenLength
   );
-
-  chunkFile = std::move(metadataLoadingResultPair.first);
-  fsn::ChunkMetadata metadata = metadataLoadingResultPair.second;
-
-  size_t currentLoc = chunkFile->tellg();
+  size_t currentLoc = chunkFile.tellg();
 
   std::cout << "Current File pointer location> " << currentLoc << "\n";
 
-  // auto bufferOpt = fsn::util::loadFileIntoBuffer("1.fsnc");
+  std::vector<char> hash = chunkMetadata.getHash();
+  std::vector<char> tokn = chunkMetadata.getToken();
+
+  fsn::diagnostics::checkNullBytesInBuffer("Hash Buffer", hash);
+  fsn::diagnostics::checkNullBytesInBuffer("Tokn Buffer", tokn);
+
+  std::cout << "Data End> " << chunkMetadata.getDataEnd();
 }
 
 int main() {
