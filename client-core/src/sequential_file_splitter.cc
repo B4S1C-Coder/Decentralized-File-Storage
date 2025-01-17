@@ -64,22 +64,18 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
 
     // Calculate hash of the data
-    // auto hash = std::move(fsn::util::calculateSHA512Hash(buffer));
     std::vector<char> hash = fsn::util::primitive_calculateSHA512Hash(buffer);
     fsn::diagnostics::checkNullBytesInBuffer("Hash Buffer", hash);
 
     // Construct the metadata for the chunk
-    // ChunkMetadata metadata(hash->size() + token->size() + dataSize, *hash, *token);
     ChunkMetadata metadata(hash.size() + token.size() + dataSize, hash, token);
     std::vector<char> metedata_bytes = metadata.construct();
 
     fsn::diagnostics::checkNullBytesInBuffer("Meta Data Buffer", metedata_bytes);
 
     // Create the final buffer to be written (without encryption)
-    // std::vector<char> unencrypted_final(metedata_bytes.size() + buffer.size());
     std::vector<char> unencrypted_final;
     unencrypted_final.reserve(metedata_bytes.size() + buffer.size());
-    // unencrypted_final.resize(metedata_bytes.size() + buffer.size());
     unencrypted_final.insert(unencrypted_final.end(), metedata_bytes.begin(), metedata_bytes.end());
     unencrypted_final.insert(unencrypted_final.end(), buffer.begin(), buffer.end());
 
@@ -92,16 +88,6 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
 
     outfile.write(unencrypted_final.data(), unencrypted_final.size());
     outfile.close();
-
-    // Encrypt the buffer here (ignore for now)
-
-    // DEBUG only
-    // std::cout << dataSize << "\n";
-    // std::cout << "\n-------------------\n";
-
-    // for (auto i: buffer) {
-    //   std::cout << i;
-    // }
 
     std::cout << "\n-------------------\n";
   }

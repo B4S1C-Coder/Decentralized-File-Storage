@@ -6,6 +6,7 @@
 #include <fstream>
 #include <memory>
 #include <utility>
+#include <iostream>
 
 namespace fsn {
 
@@ -44,6 +45,14 @@ public:
     _if.read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
 
     return ChunkMetadata(dataEnd, hash, token);
+  }
+
+  void printStatus() {
+    std::cout << "METADATA STATUS\n-----------------\n";
+    std::cout << "Data End : " << m_dataEnd <<"\n";
+    std::cout << "Hash Size: " << m_hash.size() << "\n";
+    std::cout << "Tokn Size: " << m_token.size() << "\n";
+    std::cout << "-----------------\n";
   }
 
   size_t getDataEnd() const { return m_dataEnd;  }
