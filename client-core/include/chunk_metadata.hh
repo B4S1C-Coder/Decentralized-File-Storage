@@ -7,6 +7,7 @@
 #include <memory>
 #include <utility>
 #include <iostream>
+#include <endian.h>
 
 namespace fsn {
 
@@ -25,8 +26,14 @@ public:
 
     metadata.insert(metadata.end(), m_hash.begin(), m_hash.end());
     metadata.insert(metadata.end(), m_token.begin(), m_token.end());
-    metadata.insert(metadata.end(), reinterpret_cast<const char*>(&m_dataEnd),
-      reinterpret_cast<const char*>(&m_dataEnd) + sizeof(size_t));
+    // metadata.insert(metadata.end(), reinterpret_cast<const char*>(&m_dataEnd),
+    //   reinterpret_cast<const char*>(&m_dataEnd) + sizeof(size_t));
+
+    // Converting to little-endian since size of size_t would differ from system to system
+    uint64_t dataEndLE = htole64(m_dataEnd);
+
+    std::copy(reinterpret_cast<const char*>(&dataEndLE),
+      reinterpret_cast<const char*>(&dataEndLE) + sizeof(uint64_t), metadata.begin() + m_hash.size() + m_token.size());
 
     return metadata;
   }
@@ -41,8 +48,12 @@ public:
     std::vector<char> token(tokenLen);
     _if.read(token.data(), token.size());
 
-    size_t dataEnd;
-    _if.read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
+    // size_t dataEnd;
+    // _if.read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
+
+    uint64_t dataEndLE;
+    _if.read(reinterpret_cast<char*>(&dataEndLE), sizeof(uint64_t));
+    size_t dataEnd = le64toh(dataEndLE);
 
     return ChunkMetadata(dataEnd, hash, token);
   }
