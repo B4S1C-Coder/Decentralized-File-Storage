@@ -19,7 +19,9 @@ public:
   std::vector<char> construct() {
     
     std::vector<char> metadata;
-    size_t metadataSize = m_hash.size() + m_token.size() + sizeof(size_t);
+
+    std::string dataEndStr = std::to_string(m_dataEnd);
+    size_t metadataSize = m_hash.size() + m_token.size() + dataEndStr.size() + sizeof(size_t);
 
     metadata.reserve(metadataSize);
     // metadata.resize(metadataSize);
@@ -30,10 +32,14 @@ public:
     //   reinterpret_cast<const char*>(&m_dataEnd) + sizeof(size_t));
 
     // Converting to little-endian since size of size_t would differ from system to system
-    uint64_t dataEndLE = htole64(m_dataEnd);
+    // uint64_t dataEndLE = htole64(m_dataEnd);
 
-    std::copy(reinterpret_cast<const char*>(&dataEndLE),
-      reinterpret_cast<const char*>(&dataEndLE) + sizeof(uint64_t), metadata.begin() + m_hash.size() + m_token.size());
+    // std::copy(reinterpret_cast<const char*>(&dataEndLE),
+    //   reinterpret_cast<const char*>(&dataEndLE) + sizeof(uint64_t), metadata.begin() + m_hash.size() + m_token.size());
+
+    size_t strLen = dataEndStr.size();
+    metadata.insert(metadata.end(), reinterpret_cast<const char*>(&strLen), reinterpret_cast<const char*>(&strLen) + sizeof(size_t));
+    metadata.insert(metadata.end(), dataEndStr.begin(), dataEndStr.end());    
 
     return metadata;
   }
@@ -48,12 +54,26 @@ public:
     std::vector<char> token(tokenLen);
     _if.read(token.data(), token.size());
 
+    size_t strLen;
+    _if.read(reinterpret_cast<char*>(&strLen), sizeof(size_t));
+
     // size_t dataEnd;
     // _if.read(reinterpret_cast<char*>(&dataEnd), sizeof(size_t));
 
-    uint64_t dataEndLE;
-    _if.read(reinterpret_cast<char*>(&dataEndLE), sizeof(uint64_t));
-    size_t dataEnd = le64toh(dataEndLE);
+    // uint64_t dataEndLE;
+    // _if.read(reinterpret_cast<char*>(&dataEndLE), sizeof(uint64_t));
+    // size_t dataEnd = le64toh(dataEndLE);
+
+    std::vector<char> dataEndChars(strLen);
+    _if.read(dataEndChars.data(), strLen);
+    std::string dataEndStr(dataEndChars.begin(), dataEndChars.end());
+
+    size_t dataEnd;
+    try {
+      dataEnd = std::stoull(dataEndStr);
+    } catch (const std::exception& e) {
+      throw std::runtime_error("Failed to convert data end string to integer: " + std::string(e.what()));
+    }
 
     return ChunkMetadata(dataEnd, hash, token);
   }

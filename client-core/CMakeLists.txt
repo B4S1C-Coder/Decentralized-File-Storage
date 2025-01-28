@@ -17,6 +17,7 @@ set(CLIENTCORE_SOURCES
   src/util.cc
   src/thread_pool.cc
   src/diagnostics.cc
+  src/logger.cc
 )
 
 add_library(clientcore ${CLIENTCORE_SOURCES})
@@ -27,5 +28,7 @@ target_link_libraries(clientcore ${LIBSODIUM_LIBRARIES})
 add_executable(test test/test.cc)
 add_executable(test_reconst_unenc test/test_file_reconst_unenc.cc)
 add_executable(test_endian test/test_endian.cc)
+add_executable(test_log test/test_log.cc)
 target_link_libraries(test clientcore)
 target_link_libraries(test_reconst_unenc clientcore)
+target_link_libraries(test_log clientcore)

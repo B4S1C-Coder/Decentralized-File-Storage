@@ -38,18 +38,15 @@ void fsn::SequentialFileSplitter::printStatus() {
 }
 
 int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDirPath) {
-  // std::vector<char> buffer(m_bytesPerChunks);
   std::vector<char> buffer;
   buffer.reserve(m_bytesPerChunks);
   int chunkCount = 1;
 
-  // auto token = std::move(fsn::util::generateRandomToken());
   std::vector<char> token = fsn::util::primitive_generateRandomToken();
   fsn::diagnostics::checkNullBytesInBuffer("Token Buffer", token);
 
   while (true) {
     buffer.resize(m_bytesPerChunks);
-    // m_currentFile->read(buffer.data(), buffer.size());
     m_currentFile->read(buffer.data(), m_bytesPerChunks);
     std::streamsize dataSize = m_currentFile->gcount();
 
@@ -67,8 +64,10 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     std::vector<char> hash = fsn::util::primitive_calculateSHA512Hash(buffer);
     fsn::diagnostics::checkNullBytesInBuffer("Hash Buffer", hash);
 
+    size_t dataEnd = hash.size() + token.size() + sizeof(size_t) + std::to_string(dataSize).size();
+
     // Construct the metadata for the chunk
-    ChunkMetadata metadata(hash.size() + token.size() + dataSize, hash, token);
+    ChunkMetadata metadata(dataEnd, hash, token);
     std::vector<char> metedata_bytes = metadata.construct();
 
     fsn::diagnostics::checkNullBytesInBuffer("Meta Data Buffer", metedata_bytes);
