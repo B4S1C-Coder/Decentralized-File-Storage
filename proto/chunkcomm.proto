@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message CommData {
+  bytes chunkData = 1;
+  bytes packetHash = 2;
+}
+
+message CommResp {
+  bool chunkAccepted = 1;
+}
+
+service ChunkIngestion {
+  rpc ingestChunk(CommData) returns (CommResp) {}
+}
