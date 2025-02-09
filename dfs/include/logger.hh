@@ -6,7 +6,7 @@
 
 namespace fsn::logger {
   enum LOG_LEVEL {
-    INFO, WARN, ERROR, FATAL, DEBUG
+    DEBUG = 0, INFO = 1, WARN = 2, ERROR = 3, FATAL = 4
   };
 
   inline std::string currentTimestamp() {
@@ -17,5 +17,7 @@ namespace fsn::logger {
   std::string logLevelStr(LOG_LEVEL level);
 
   void consoleLog(std::string_view message, LOG_LEVEL level=DEBUG);
+
+  void setLogThreshold(LOG_LEVEL level);
 
 }
