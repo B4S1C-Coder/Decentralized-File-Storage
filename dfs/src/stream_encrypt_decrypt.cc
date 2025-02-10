@@ -8,6 +8,7 @@
 #include <cstring>
 #include <vector>
 #include "stream_encrypt_decrypt.hh"
+#include "util.hh"
 
 fsn::StreamEncryptorDecryptor::StreamEncryptorDecryptor(
   std::optional<std::pair<std::string, std::string>> keyFileNonceFile
@@ -68,13 +69,43 @@ std::pair<std::unique_ptr<unsigned char[]>, size_t> fsn::StreamEncryptorDecrypto
   return std::pair<std::unique_ptr<unsigned char[]>, size_t>(std::move(encrypted), encrypted_len);
 }
 
-// std::unique_ptr<std::vector<char>> xchacha20poly1305_encrypt(std::vector<char>& inputBuffer) {
-//   std::unique_ptr<std::vector<char>> encryptedBuffer = std::make_unique<std::vector<char>>(
-//     inputBuffer.size() + crypto_aead_xchacha20poly1305_ietf_ABYTES
-//   );
+std::vector<char> fsn::StreamEncryptorDecryptor::xchacha20poly1305_encrypt(std::vector<char>& inputBuffer) {
 
+  std::vector<char> encryptedBuffer(inputBuffer.size() + crypto_aead_xchacha20poly1305_ietf_ABYTES);
+  std::vector<char> inputBufferHash = fsn::util::primitive_calculateSHA512Hash(inputBuffer);
 
-// }
+  unsigned long long encrypted_len = 0;
+
+  crypto_aead_xchacha20poly1305_ietf_encrypt(
+    reinterpret_cast<unsigned char*>(encryptedBuffer.data()), &encrypted_len,
+    reinterpret_cast<unsigned char*>(inputBuffer.data()), inputBuffer.size(),
+    reinterpret_cast<unsigned char*>(inputBufferHash.data()), inputBufferHash.size(), NULL, m_nonce, m_key
+  );
+
+  encryptedBuffer.resize(encrypted_len);
+
+  return encryptedBuffer;
+}
+
+std::optional<std::vector<char>> fsn::StreamEncryptorDecryptor::xchacha20poly1305_decrypt(
+  std::vector<char>& encryptedBuffer, std::vector<char>& messageHash
+) {
+  std::vector<char> decryptedBuffer(encryptedBuffer.size());
+  unsigned long long decrypted_len = 0;
+
+  bool decryptionSuccess = (crypto_aead_xchacha20poly1305_ietf_decrypt(
+    reinterpret_cast<unsigned char*>(decryptedBuffer.data()), &decrypted_len, NULL,
+    reinterpret_cast<unsigned char*>(encryptedBuffer.data()), encryptedBuffer.size(),
+    reinterpret_cast<unsigned char*>(messageHash.data()), crypto_hash_sha512_BYTES, m_nonce, m_key
+  ) == 0);
+
+  if (decryptionSuccess) {
+    decryptedBuffer.resize(decrypted_len);
+    return decryptedBuffer;
+  } else {
+    return std::nullopt;
+  }
+}
 
 std::optional<std::pair<std::unique_ptr<unsigned char[]>, size_t>> fsn::StreamEncryptorDecryptor::decrypt(
   std::unique_ptr<unsigned char[]> encrypted, size_t encryptedLen,
