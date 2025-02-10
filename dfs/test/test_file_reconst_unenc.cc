@@ -11,6 +11,12 @@ std::string dataFilePath = "../res/data.txt";
 const size_t tokenLength = 32;
 
 void hardCodedReconstruct() {
+
+  if (sodium_init() == -1) {
+    std::cout << "Sodium initialization failed.\n";
+    return;
+  }
+
   // To verify whether the unencrypted with metadata token split was actually done properly
   // This would be checked by recombining the chunks and manually recombining the chunks whilst separating
   // the metadata and ensuring that metadata was correctly written and can be correctly loaded and parsed.
@@ -32,6 +38,21 @@ void hardCodedReconstruct() {
   fsn::diagnostics::checkNullBytesInBuffer("Tokn Buffer", tokn);
 
   std::cout << "Data End> " << chunkMetadata.getDataEnd();
+
+  // Extract Data
+  std::vector<char> rawData;
+  rawData.reserve(chunkMetadata.getDataEnd() - currentLoc + 1);
+  chunkFile.read(rawData.data(), chunkMetadata.getDataEnd() - currentLoc + 1);
+
+  // Compare hash of raw data with stored hash
+  std::vector<char> calculatedHash = fsn::util::primitive_calculateSHA512Hash(rawData);
+  bool hashCompSuccess = (sodium_memcmp(calculatedHash.data(), hash.data(), crypto_hash_sha512_BYTES));
+
+  if (hashCompSuccess) {
+    std::cout << "Hashes match.\n";
+  } else {
+    std::cout << "Hashes do not match.\n";
+  }
 }
 
 int main() {

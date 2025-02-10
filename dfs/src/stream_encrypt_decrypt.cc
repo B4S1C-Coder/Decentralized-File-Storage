@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <cstring>
+#include <vector>
 #include "stream_encrypt_decrypt.hh"
 
 fsn::StreamEncryptorDecryptor::StreamEncryptorDecryptor(
@@ -66,6 +67,14 @@ std::pair<std::unique_ptr<unsigned char[]>, size_t> fsn::StreamEncryptorDecrypto
   // std::make_pair was causing some problems with std::unique_ptr<unsigned char[]>
   return std::pair<std::unique_ptr<unsigned char[]>, size_t>(std::move(encrypted), encrypted_len);
 }
+
+// std::unique_ptr<std::vector<char>> xchacha20poly1305_encrypt(std::vector<char>& inputBuffer) {
+//   std::unique_ptr<std::vector<char>> encryptedBuffer = std::make_unique<std::vector<char>>(
+//     inputBuffer.size() + crypto_aead_xchacha20poly1305_ietf_ABYTES
+//   );
+
+
+// }
 
 std::optional<std::pair<std::unique_ptr<unsigned char[]>, size_t>> fsn::StreamEncryptorDecryptor::decrypt(
   std::unique_ptr<unsigned char[]> encrypted, size_t encryptedLen,
