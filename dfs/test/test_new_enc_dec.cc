@@ -7,6 +7,12 @@
 #include "util.hh"
 
 int main() {
+
+  if (sodium_init() == -1) {
+    std::cout << "Sodium initialization failed.\n";
+    return -1;
+  }
+
   const std::string dataFilePath = "../res/data.txt";
   fsn::StreamEncryptorDecryptor sed;
 
@@ -28,6 +34,17 @@ int main() {
   if (decryptOpt == std::nullopt) {
     std::cout << "Decryption failed.\n";
     return 2;
+  }
+
+  // Calculate final hash (hash of the decrypted data)
+  std::vector<char> finalHash = fsn::util::primitive_calculateSHA512Hash(decryptOpt.value());
+
+  bool hashesMatch = (sodium_memcmp(initialHash.data(), finalHash.data(), crypto_hash_sha512_BYTES) == 0);
+
+  if (hashesMatch) {
+    std::cout << "Hashes match.\n";
+  } else {
+    std::cout << "Hashes do not match.\n";
   }
 
   return 0;

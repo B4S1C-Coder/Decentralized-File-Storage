@@ -46,7 +46,10 @@ void hardCodedReconstruct() {
 
   // Compare hash of raw data with stored hash
   std::vector<char> calculatedHash = fsn::util::primitive_calculateSHA512Hash(rawData);
-  bool hashCompSuccess = (sodium_memcmp(calculatedHash.data(), hash.data(), crypto_hash_sha512_BYTES));
+  bool hashCompSuccess = (sodium_memcmp(calculatedHash.data(), hash.data(), crypto_hash_sha512_BYTES) == 0);
+
+  char hashHexReprRaw[128];
+  sodium_bin2hex(hashHexReprRaw, 128, reinterpret_cast<unsigned char*>(hash.data()), crypto_hash_sha512_BYTES);
 
   if (hashCompSuccess) {
     std::cout << "Hashes match.\n";
