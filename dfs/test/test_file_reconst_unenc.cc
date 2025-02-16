@@ -6,6 +6,7 @@
 #include "sequential_file_splitter.hh"
 #include "util.hh"
 #include "diagnostics.hh"
+#include "logger.hh"
 
 std::string dataFilePath = "../res/data.txt";
 const size_t tokenLength = 32;
@@ -29,7 +30,7 @@ void hardCodedReconstruct() {
   );
   size_t currentLoc = chunkFile.tellg();
 
-  std::cout << "Current File pointer location> " << currentLoc << "\n";
+  fsn::logger::consoleLog("Current File pointer location> " + std::to_string(currentLoc));
 
   std::vector<char> hash = chunkMetadata.getHash();
   std::vector<char> tokn = chunkMetadata.getToken();
@@ -37,19 +38,36 @@ void hardCodedReconstruct() {
   fsn::diagnostics::checkNullBytesInBuffer("Hash Buffer", hash);
   fsn::diagnostics::checkNullBytesInBuffer("Tokn Buffer", tokn);
 
-  std::cout << "Data End> " << chunkMetadata.getDataEnd();
-
+  fsn::logger::consoleLog("Data End> " + std::to_string(chunkMetadata.getDataEnd()));
+  
   // Extract Data
-  std::vector<char> rawData;
-  rawData.reserve(chunkMetadata.getDataEnd() - currentLoc + 1);
-  chunkFile.read(rawData.data(), chunkMetadata.getDataEnd() - currentLoc + 1);
+  size_t datSize = chunkMetadata.getDataEnd() - currentLoc + 1;
 
+  fsn::logger::consoleLog("Preparing to read " + std::to_string(datSize) + " bytes.");
+
+  std::vector<char> rawData(datSize);
+  // rawData.reserve(chunkMetadata.getDataEnd() - currentLoc + 1);
+  chunkFile.read(rawData.data(), datSize);
+
+  
   // Compare hash of raw data with stored hash
-  std::vector<char> calculatedHash = fsn::util::primitive_calculateSHA512Hash(rawData);
-  bool hashCompSuccess = (sodium_memcmp(calculatedHash.data(), hash.data(), crypto_hash_sha512_BYTES) == 0);
 
-  char hashHexReprRaw[128];
-  sodium_bin2hex(hashHexReprRaw, 128, reinterpret_cast<unsigned char*>(hash.data()), crypto_hash_sha512_BYTES);
+  if (hash.empty() || hash.size() != crypto_hash_sha512_BYTES) {
+    fsn::logger::consoleLog(
+      "Error: Invaild hash size: " + std::to_string(hash.size()) + "bytes. Expected: "
+      + std::to_string(crypto_hash_sha512_BYTES) + "bytes.", fsn::logger::ERROR);
+    return;
+  }
+
+  fsn::diagnostics::checkNullBytesInBuffer("Data Buffer", rawData);
+
+  std::vector<char> calculatedHash = fsn::util::primitive_calculateSHA512Hash(rawData);
+  fsn::logger::consoleLog("Hash calculated.");
+  bool hashCompSuccess = (sodium_memcmp(calculatedHash.data(), hash.data(), crypto_hash_sha512_BYTES) == 0);
+  fsn::logger::consoleLog("Hash comparision completed.");
+
+  // char hashHexReprRaw[128];
+  // sodium_bin2hex(hashHexReprRaw, 128, reinterpret_cast<unsigned char*>(hash.data()), crypto_hash_sha512_BYTES);
 
   if (hashCompSuccess) {
     std::cout << "Hashes match.\n";
