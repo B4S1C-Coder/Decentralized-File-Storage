@@ -14,5 +14,6 @@ namespace fsn::util {
   std::vector<char> primitive_calculateSHA512Hash(std::vector<char>& inputBuffer);
   std::unique_ptr<std::vector<char>> generateRandomToken();
   std::vector<char> primitive_generateRandomToken();
+  std::string to_paddedString(unsigned long long num, int width=4);
 
 }

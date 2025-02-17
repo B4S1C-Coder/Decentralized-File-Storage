@@ -69,7 +69,13 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     // fsn::diagnostics::checkNullBytesInBuffer("Hash Buffer", hash);
     fsn::logger::consoleLog("Hash Calculated");
 
-    size_t dataEnd = hash.size() + token.size() + sizeof(size_t) + std::to_string(dataSize).size() + buffer.size() - 1;
+    size_t dataEnd = hash.size() + token.size() + sizeof(size_t) + fsn::util::to_paddedString(dataSize).size() + buffer.size() - 1;
+    
+    fsn::logger::consoleLog(
+      "DATA END BREAKDOWN: hashSize = " + std::to_string(hash.size()) + " tokenSize = " + std::to_string(token.size())
+      + "sizeof size_t = " + std::to_string(sizeof(size_t)) + " dataSizeStringSize = "
+      + std::to_string(fsn::util::to_paddedString(dataSize).size()) + " bufferSize = " + std::to_string(buffer.size()) + " - 1"
+    );
 
     // Construct the metadata for the chunk
     ChunkMetadata metadata(dataEnd, hash, token);

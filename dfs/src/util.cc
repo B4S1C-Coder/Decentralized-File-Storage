@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sodium.h>
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include "util.hh"
 
 std::optional<std::unique_ptr<std::vector<char>>> fsn::util::loadFileIntoBuffer(const std::string& path) {
@@ -63,4 +65,10 @@ std::vector<char> fsn::util::primitive_generateRandomToken() {
   token.resize(32);
   randombytes_buf(reinterpret_cast<unsigned char*>(token.data()), 32);
   return token;
+}
+
+std::string fsn::util::to_paddedString(unsigned long long num, int width) {
+  std::ostringstream oss;
+  oss << std::setw(width) << std::setfill('0') << num;
+  return oss.str();
 }

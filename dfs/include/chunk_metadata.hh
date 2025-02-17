@@ -8,6 +8,7 @@
 #include <utility>
 #include <iostream>
 #include <endian.h>
+#include "util.hh"
 
 namespace fsn {
 
@@ -20,7 +21,8 @@ public:
     
     std::vector<char> metadata;
 
-    std::string dataEndStr = std::to_string(m_dataEnd);
+    // std::string dataEndStr = std::to_string(m_dataEnd);
+    std::string dataEndStr = fsn::util::to_paddedString(m_dataEnd);
     size_t metadataSize = m_hash.size() + m_token.size() + dataEndStr.size() + sizeof(size_t);
 
     metadata.reserve(metadataSize);
