@@ -76,6 +76,72 @@ void hardCodedReconstruct() {
   }
 }
 
+void complete_hardcodedReconstructUnencrypted() {
+  if (sodium_init() == -1) {
+    fsn::logger::consoleLog("Sodium Initialization failed.", fsn::logger::FATAL);
+    return;
+  }
+
+  std::ofstream reconstructedFile("reconstructed.txt", std::ios::app | std::ios::binary);
+  if (!reconstructedFile) {
+    fsn::logger::consoleLog("Failed to open output file. Aborting ...", fsn::logger::ERROR);
+    return;
+  }
+
+  // Reconstruction loop
+  for (int i = 1; i < 7; i++) {
+    std::string fileName = std::to_string(i) + ".fsnc";
+    fsn::logger::consoleLog("Processing " + fileName, fsn::logger::INFO);
+
+    // Load the chunk file
+    std::ifstream chunkFile(fileName, std::ios::binary);
+    if (!chunkFile) {
+      fsn::logger::consoleLog("Error opening " + fileName, fsn::logger::ERROR);
+      return;
+    }
+
+    // Loading the Chunk Metadata
+    fsn::ChunkMetadata chunkMetadata = fsn::ChunkMetadata::loadFromFile(
+      chunkFile, crypto_hash_sha512_BYTES, tokenLength
+    );
+    fsn::logger::consoleLog("Metadata loaded.", fsn::logger::INFO);
+    // chunkMetadata.printStatus();
+
+    // Extract Data
+    fsn::logger::consoleLog("Current File Pointer location> " + std::to_string(chunkFile.tellg()));
+
+    if (chunkMetadata.getDataEnd() < chunkFile.tellg()) {
+      fsn::logger::consoleLog("Possible corrupted chunk. Skipping ...", fsn::logger::WARN);
+      chunkFile.close();
+      continue;
+    }
+
+    size_t dataSize = chunkMetadata.getDataEnd() - chunkFile.tellg() + 1;
+    fsn::logger::consoleLog("Preparing to read " + std::to_string(dataSize) + " bytes of data ...", fsn::logger::INFO);
+
+    std::vector<char> dataBuffer(dataSize);
+    chunkFile.read(dataBuffer.data(), dataSize);
+
+    chunkFile.close();
+
+    // Compare the calculated hash with the stored hash
+    std::vector<char> calculatedHash = fsn::util::primitive_calculateSHA512Hash(dataBuffer);
+    bool hashComparisionSuccess = (
+      sodium_memcmp(calculatedHash.data(), chunkMetadata.getHash().data(), crypto_hash_sha512_BYTES) == 0
+    );
+
+    if (hashComparisionSuccess) {
+      fsn::logger::consoleLog("Hash verified.", fsn::logger::INFO);
+      reconstructedFile.write(dataBuffer.data(), dataSize);
+      fsn::logger::consoleLog("Extracted data written to disk.", fsn::logger::INFO);
+    } else {
+      fsn::logger::consoleLog("Hashes do not match. Aborting.", fsn::logger::ERROR);
+      return;
+    }
+  }
+  reconstructedFile.close();
+}
+
 int main() {
   if (sodium_init() == -1) {
     std::cout << "Sodium initialization failed.\n";
@@ -85,6 +151,7 @@ int main() {
   // fsn::SequentialFileSplitter sfs(dataFilePath, 5);
   // std::cout << "Successful Linking\n";
 
-  hardCodedReconstruct();
+  // hardCodedReconstruct();
+  complete_hardcodedReconstructUnencrypted();
   return 0;
 }
