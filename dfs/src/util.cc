@@ -72,3 +72,14 @@ std::string fsn::util::to_paddedString(unsigned long long num, int width) {
   oss << std::setw(width) << std::setfill('0') << num;
   return oss.str();
 }
+
+std::string fsn::util::bytesToHex(const std::vector<char>& bytes) {
+  std::ostringstream oss;
+  oss << std::hex << std::setfill('0');
+
+  for (unsigned char byte: bytes) {
+    oss << std::setw(2) << static_cast<int>(static_cast<unsigned char>(byte));
+  }
+
+  return oss.str();
+}

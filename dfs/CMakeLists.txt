@@ -49,6 +49,7 @@ set(DFS_SOURCES
   src/diagnostics.cc
   src/logger.cc
   src/chunk_transmitter.cc
+  src/chunk_ingestor.cc
 )
 
 add_library(dfs ${DFS_SOURCES})

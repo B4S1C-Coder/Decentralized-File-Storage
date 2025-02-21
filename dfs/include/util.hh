@@ -5,6 +5,8 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include <sodium.h>
 
 namespace fsn::util {
@@ -15,5 +17,6 @@ namespace fsn::util {
   std::unique_ptr<std::vector<char>> generateRandomToken();
   std::vector<char> primitive_generateRandomToken();
   std::string to_paddedString(unsigned long long num, int width=4);
+  std::string bytesToHex(const std::vector<char>& bytes);
 
 }
