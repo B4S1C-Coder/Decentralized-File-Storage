@@ -4,7 +4,7 @@ dFSN is a small distributed file storage newtwork which allows the user to split
 >**Note**: This project is currently under development and this README would be updated as the project progresses.
 
 ## Techstack (will be updated as development continues)
-C/C++, gRPC, Sodium, protobuf, SQLite
+C/C++, gRPC, Sodium, protobuf, SQLite, Angular, SCSS
 
 ## Architecture of the Network
 ![Working](DecentralizedFileStorage.jpg)
@@ -30,4 +30,28 @@ If this were commercial how would we get the storage nodes?
 
 
 ## Setup
-Instructions would be updated soon.
+1. Setup gRPC (1.66.0) for C/C++ by following the guide on [grpc.io](https://grpc.io/docs/languages/cpp/quickstart/)
+
+2. Setup libsodium (you can install it via apt package manager if on Debian based distros): [Sodium docs](https://doc.libsodium.org/installation)
+
+3. Clone the repository via `git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git`
+
+4. In the [dfs/CMakeLists.txt](dfs/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
+```
+protobuf_generate(
+  LANGUAGE grpc
+  OUT_VAR GRPC_SRCS
+  TARGET protolib
+  GENERATE_EXTENSIONS .grpc.pb.hh .grpc.pb.cc
+  PLUGIN "protoc-gen-grpc=/your/path/to/your/grpc_install_dir/bin/grpc_cpp_plugin"
+  IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../proto
+  PROTOS ${PROTO_FILES}
+)
+```
+5. Install npm packages for client-ui and tracker-ui: `cd client-ui && npm i && cd ../tracker-ui && npm i && cd ..`
+
+6. Last but not the least build dfs:
+ - In the project root run: `mkdir build && cd build && cmake .. && make`
+ - The build should progress smoothly provided you have set-up gRPC and Sodium correctly
+ 
+>**Note**: This project is being developed and tested on `WSL2 Ubuntu 24.04.2 LTS` with `g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0`. It is recommended that you use Linux or WSL, however as of writing, there are no platform specific components.
