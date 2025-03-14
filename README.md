@@ -8,16 +8,23 @@ C/C++, gRPC, Sodium, protobuf, SQLite, Angular, SCSS
 
 ## Architecture of the Network
 ![Working](DecentralizedFileStorage.jpg)
+This is what I initially thought of.
+![New Architecture](DecentralizedFileStorage2.0.jpg)
+The new architecture eliminates centralization around tracking servers.
+
+### Work Flow
+The diagram describes the overall workflow from the user client's perspective.
+![Work Flow](WorkFlow.jpg)
+
+There are broadly three steps *after splitting the file* into encypted chunks:
+- Firstly, choose the clusters where the chunks are going to be stored
+- Secondly, request each cluster to allocate space for your chunks with appropriate replication
+- Lastly, upload the chunks to the specific nodes as told by the respective clusters.
 
 ### Ideology behind the Network
 As illustrated in the diagram, the user client would decide the distribution of encypted chunks and the storage nodes which the client would send these chunks to would be decided by the tracking server.
 
-Now one might ask won't the tracking server introduce some amount of centralization?
-
-The purpose of the tracking servers is to:
-- Balance the load across the nodes, otherwise some nodes might be overloaded while others underloaded
-
-- Allow certain nodes to be grouped together, let's say some organization or a group of organizations want to share some data in a secure way each organization can be assured that their data stays on their nodes and due to the nature of file dispersion even an insider cannot leak any data.
+The *tracking server* will now be a separate process running only in the leader storage node. In each *storage custer* there would be a leader node that in addition to being a storage node would also serve as the tracking server and allocating storage across the enitre cluster. For every cluster, there will be a pre-defined *chain of command* and in case of the leader node going down the next highest node would automatically assume leadership. There is also one and only one *Heap Service* per cluster, this service maintains an in memory fibonacci heap (which as of now is used for allocation) and the entire chain of command. The leader node also maintains a copy of the fibonacci heap, in case of a Heap Service failure, the cluster can still operate in a *degraded mode*, all operations other than failover are possible in degraded mode.
 
 >**Note**: Unless the specific client that dispersed the chunks gets compromised. Since only that specific client knows on which nodes the chunks exist.
 
