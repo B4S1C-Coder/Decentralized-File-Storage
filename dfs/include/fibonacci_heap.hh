@@ -26,7 +26,7 @@ class FibonacciHeap {
 public:
   FibonacciHeap(): m_minNode(nullptr), m_numNodes(0) {}
   FibonacciHeapNode* insert(size_t k);
-  size_t extract_min();
+  FibonacciHeapNode* extract_min();
   void merge(FibonacciHeap& otherHeap);
   void decreaseKey(FibonacciHeapNode* node, size_t newKey);
   void deleteNode(FibonacciHeapNode* node);
@@ -34,6 +34,9 @@ public:
 private:
   FibonacciHeapNode* m_minNode;
   int m_numNodes;
+  // This constructor is for internal use, only used to create temporary FH
+  FibonacciHeap(FibonacciHeapNode* minPtr): m_minNode(minPtr), m_numNodes(0) {}
+  FibonacciHeapNode* m_identifyMin(FibonacciHeap& fibHeap, FibonacciHeapNode* start, bool unparentRootList=false);
 };
 
 }
