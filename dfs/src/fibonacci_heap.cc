@@ -1,7 +1,10 @@
 #include "fibonacci_heap.hh"
+#include <shared_mutex>
+#include <mutex>
 #include <cstddef>
 
 fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::insert(size_t k) {
+  std::unique_lock<std::shared_mutex> lock(m_rwLock);
   fsn::ds::FibonacciHeapNode* node = new fsn::ds::FibonacciHeapNode(k);
   
   if (m_minNode == nullptr) {
@@ -23,6 +26,7 @@ fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::insert(size_t k) {
 }
 
 void fsn::ds::FibonacciHeap::merge(fsn::ds::FibonacciHeap& otherHeap) {
+  std::unique_lock<std::shared_mutex> lock(m_rwLock);
   if (m_minNode == nullptr) {
     m_minNode = otherHeap.m_minNode;
     m_numNodes += otherHeap.m_numNodes;
@@ -82,6 +86,7 @@ fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::m_identifyMin(
 }
 
 fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::extract_min() {
+  std::unique_lock<std::shared_mutex> lock(m_rwLock);
   if (m_minNode == nullptr || m_numNodes == 0) { return nullptr; }
   if (m_minNode != nullptr && m_numNodes == 1) {
     fsn::ds::FibonacciHeapNode* tmp = m_minNode;

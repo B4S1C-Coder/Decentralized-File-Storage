@@ -1,5 +1,8 @@
 #pragma once
+
 #include <cstddef>
+#include <shared_mutex>
+
 namespace fsn::ds {
 /**
  * @struct FibonacciHeapNode
@@ -32,6 +35,7 @@ public:
   void deleteNode(FibonacciHeapNode* node);
 
 private:
+  mutable std::shared_mutex m_rwLock;
   FibonacciHeapNode* m_minNode;
   int m_numNodes;
   // This constructor is for internal use, only used to create temporary FH
