@@ -2,6 +2,8 @@
 #include <shared_mutex>
 #include <mutex>
 #include <cstddef>
+#include <cmath>
+#include <vector>
 
 fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::insert(size_t k) {
   std::unique_lock<std::shared_mutex> lock(m_rwLock);
@@ -121,6 +123,131 @@ fsn::ds::FibonacciHeapNode* fsn::ds::FibonacciHeap::extract_min() {
   m_numNodes = currentNumNodes;
 
   // TO-DO: Add consolidation step here
+  m_consolidate();
 
   return temp;
+}
+
+void fsn::ds::FibonacciHeap::m_consolidate() {
+  if (m_minNode == nullptr) {
+    return;
+  }
+
+  int maxDegree = static_cast<int>(log2(m_numNodes)) + 1;
+  std::vector<fsn::ds::FibonacciHeapNode*> degreeTable(maxDegree, nullptr);
+
+  std::vector<fsn::ds::FibonacciHeapNode*> rootNodes;
+  fsn::ds::FibonacciHeapNode* current = m_minNode;
+
+  do {
+    rootNodes.push_back(current);
+    current = current->rightSib;
+  } while (current != m_minNode);
+
+  for (fsn::ds::FibonacciHeapNode* node: rootNodes) {
+    int degree = node->degree;
+
+    while (degreeTable[degree] != nullptr) {
+      fsn::ds::FibonacciHeapNode* other = degreeTable[degree];
+
+      if (node->key > other->key) {
+        std::swap(node, other);
+      }
+
+      // Make 'other' a child of 'node'
+      other->leftSib->rightSib = other->rightSib;
+      other->rightSib->leftSib = other->leftSib;
+
+      other->parent = node;
+      other->rightSib = node->child;
+      other->leftSib = (node->child) ? node->child->leftSib : other;
+
+      if (node->child) {
+        node->child->leftSib->rightSib = other;
+        node->child->leftSib = other;
+      } else {
+        node->child = other;
+      }
+
+      node->degree++;
+
+      degreeTable[degree] = nullptr;
+      degree++;
+    }
+
+    degreeTable[degree] = node;
+  }
+
+  // Reset min-pointer
+  m_minNode = nullptr;
+  for (auto node: degreeTable) {
+    if (node != nullptr) {
+      if (m_minNode == nullptr || node->key < m_minNode->key) {
+        m_minNode = node;
+      }
+    }
+  }
+}
+
+void fsn::ds::FibonacciHeap::decreaseKey(fsn::ds::FibonacciHeapNode* node, size_t newKey) {
+  std::unique_lock<std::shared_mutex>lock(m_rwLock);
+
+  if (newKey > node->key) { return; }
+
+  node->key = newKey;
+  fsn::ds::FibonacciHeapNode* parent = node->parent;
+
+  if (parent == nullptr && node->key < parent->key) {
+    if (node->rightSib != node) {
+      node->leftSib->rightSib = node->rightSib;
+      node->rightSib->leftSib = node->leftSib;
+    }
+
+    if (parent->child == node) {
+      parent->child = (node->rightSib != node) ? node->rightSib : nullptr;
+    }
+
+    parent->degree--;
+    node->parent = nullptr;
+    node->marked = false;
+
+    node->rightSib = m_minNode->rightSib;
+    m_minNode->rightSib->leftSib = node;
+    node->leftSib = m_minNode;
+    m_minNode->rightSib = node;
+
+    fsn::ds::FibonacciHeapNode* grandparent = parent->parent;
+
+    while (grandparent != nullptr) {
+      if (!parent->marked) {
+        parent->marked = true;
+        break;
+      }
+
+      if (parent->rightSib != parent) {
+        parent->leftSib->rightSib = parent->rightSib;
+        parent->rightSib->leftSib = parent->leftSib;
+      }
+
+      if (grandparent->child == parent) {
+        grandparent->child = (parent->rightSib != parent) ? parent->rightSib : nullptr;
+      }
+
+      grandparent->degree--;
+      parent->parent = nullptr;
+      parent->marked = false;
+
+      parent->rightSib = m_minNode->rightSib;
+      m_minNode->rightSib->leftSib = parent;
+      parent->leftSib = m_minNode;
+      m_minNode->rightSib = parent;
+
+      parent = grandparent;
+      grandparent = grandparent->parent;
+    }
+  }
+
+  if (node->key < m_minNode->key) {
+    m_minNode = node;
+  }
 }

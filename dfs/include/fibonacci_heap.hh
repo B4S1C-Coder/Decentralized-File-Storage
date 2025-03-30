@@ -17,8 +17,9 @@ struct FibonacciHeapNode {
   FibonacciHeapNode* rightSib;
   bool marked;
   FibonacciHeapNode* child;
+  int degree;
 
-  FibonacciHeapNode(size_t k): key(k), parent(nullptr), leftSib(this), rightSib(this), marked(false), child(nullptr) {}
+  FibonacciHeapNode(size_t k): key(k), parent(nullptr), leftSib(this), rightSib(this), marked(false), child(nullptr), degree(0) {}
 };
 
 /**
@@ -41,6 +42,7 @@ private:
   // This constructor is for internal use, only used to create temporary FH
   FibonacciHeap(FibonacciHeapNode* minPtr): m_minNode(minPtr), m_numNodes(0) {}
   FibonacciHeapNode* m_identifyMin(FibonacciHeap& fibHeap, FibonacciHeapNode* start, bool unparentRootList=false);
+  void m_consolidate();
 };
 
 }
