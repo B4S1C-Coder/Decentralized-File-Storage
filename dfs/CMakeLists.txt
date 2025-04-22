@@ -54,6 +54,10 @@ set(DFS_SOURCES
 
 add_library(dfs ${DFS_SOURCES})
 target_include_directories(dfs PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+# target_include_directories(dfs PUBLIC
+#     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/dfs>
+# )
 target_link_libraries(dfs ${LIBSODIUM_LIBRARIES} protolib gRPC::grpc++ protobuf::libprotobuf)
 
 # executable
