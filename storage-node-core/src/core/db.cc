@@ -38,3 +38,37 @@ bool core::SQLite3DB::createTable(const std::string& tname, const std::vector<st
 
   return true;
 }
+
+bool core::SQLite3DB::createTable(const core::dto::DTO& dto) {
+  char* errMsg;
+  const std::string sqlStatement = dto.getCreateTableStatement();
+
+  fsn::logger::consoleLog(sqlStatement);
+  int rc = sqlite3_exec(m_db.get(), sqlStatement.c_str(), nullptr, nullptr, &errMsg);
+
+  if (rc != SQLITE_OK) {
+    fsn::logger::consoleLog(errMsg, fsn::logger::ERROR);
+    sqlite3_free(errMsg);
+    return false;
+  }
+
+  fsn::logger::consoleLog("Created table via DTO");
+  return true;
+}
+
+bool core::SQLite3DB::insertData(const core::dto::DTO& dto) {
+  char* errMsg;
+  const std::string sqlStatement = dto.getInsertStatement();
+
+  fsn::logger::consoleLog(sqlStatement);
+  int rc = sqlite3_exec(m_db.get(), sqlStatement.c_str(), nullptr, nullptr, &errMsg);
+
+  if (rc != SQLITE_OK) {
+    fsn::logger::consoleLog(errMsg, fsn::logger::ERROR);
+    sqlite3_free(errMsg);
+    return false;
+  }
+
+  fsn::logger::consoleLog("Data inserted via DTO");
+  return true;
+}
