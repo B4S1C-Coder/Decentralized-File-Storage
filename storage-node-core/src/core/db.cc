@@ -72,3 +72,32 @@ bool core::SQLite3DB::insertData(const core::dto::DTO& dto) {
   fsn::logger::consoleLog("Data inserted via DTO");
   return true;
 }
+
+// template<typename T>
+// requires core::DerivedFromDTO<T>
+// std::unique_ptr<T> core::SQLite3DB::fetchObject(const T& dto) {
+  
+//   const std::string sqlStatement = dto.getFetchOneStatement();
+//   sqlite3_stmt* stmt;
+
+//   int rc = sqlite3_prepare_v2(m_db.get(), sqlStatement.c_str(), -1, &stmt, 0);
+//   if (rc != SQLITE_OK) {
+//     sqlite3_finalize(stmt);
+//     fsn::logger::consoleLog("SQL Query preparation failed.", fsn::logger::ERRROR);
+//     throw std::runtime_error("SQL Query preparation failed.");
+//   }
+
+//   rc = sqlite3_step(stmt);
+//   if (rc != SQLITE_ROW) {
+//     sqlite3_finalize(stmt);
+//     fsn::logger::consoleLog("No Row Returned.", fsn::logger::ERROR);
+//     throw std::runtime_error("No row returned.");
+//   }
+
+
+
+//   std::unique_ptr<T> obp = dto.buildDTOFromStmt(stmt);
+//   sqlite3_finalize(stmt);
+
+//   return obp;
+// }

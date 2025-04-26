@@ -2,6 +2,10 @@
 
 #include <string>
 #include <memory>
+#include <unordered_map>
+#include <any>
+#include <sqlite3.h>
+#include "core/db.hh"
 
 // Various DTOs for internal use, to be used by SQLite3 Database Wrapper
 
@@ -11,6 +15,11 @@ class DTO {
 public:
   virtual std::string getCreateTableStatement() const = 0;
   virtual std::string getInsertStatement() const = 0;
+  virtual std::string getFetchOneStatement() const = 0;
+  
+  // template<typename T>
+  // requires core::DerivedFromDTO<T>
+  // virtual std::unique_ptr<T> buildDTOFromStmt(sqlite3_stmt* stmt) = 0;
 };
 
 class ConfigurationDTO : public DTO {
@@ -49,11 +58,18 @@ public:
   inline std::string getInsertStatement() const override {
     return "INSERT INTO config(dbPath, maxOccupyDataDirSizeInMB, inactiveDeletionDurationInDays," 
           "nodeSecretKey, userInterfaceAuthKey, rootUserName, rootUserPasswordHash, blockedIPSCSV)"
-          " VALUES (" + dbpath + ", " + std::to_string(maxOccupyDataDirSizeInMB) + ", " +
-          std::to_string(inactiveDeletionDurationInDays) + ", " + nodeSecretKey + ", " +
-          userInterfaceAuthKey + ", " + rootUserName + ", " + rootUserPasswordHash + ", " +
-          blockedIPSCSV + ");";
+          " VALUES (\"" + dbpath + "\", " + std::to_string(maxOccupyDataDirSizeInMB) + ", " +
+          std::to_string(inactiveDeletionDurationInDays) + ", \"" + nodeSecretKey + "\", \"" +
+          userInterfaceAuthKey + "\", \"" + rootUserName + "\", \"" + rootUserPasswordHash + "\", \"" +
+          blockedIPSCSV + "\");";
   }
+
+  inline std::string getFetchOneStatement() const override {
+    return "SELECT dbPath, maxOccupyDataDirSizeInMB, inactiveDeletionDurationInDays, nodeSecretKey,"
+    " userInterfaceAuthKey, rootUserName, rootUserPasswordHash, blockedIPSCSV FROM config LIMIT 1;";
+  }
+
+  // std::unique_ptr<DTO> buildDTOFromStmt(sqlite3_stmt* stmt) override;
 
 private:
   std::string dbpath;

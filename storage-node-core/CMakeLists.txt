@@ -48,6 +48,7 @@ target_include_directories(protolibsnc PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 set(CORELIB_SOURCES
   src/core/config.cc
   src/core/db.cc
+  src/core/dto.cc
 )
 
 add_library(corelib STATIC ${CORELIB_SOURCES})
@@ -75,6 +76,8 @@ target_link_libraries(storage_node_core PRIVATE corelib)
 # === Test Executables ===
 add_executable(test_sqlite3 test/test_sqlite3.cc)
 add_executable(test_db_wrapper test/test_db_wrapper.cc)
+add_executable(test_db_write test/test_db_write.cc)
 
 target_link_libraries(test_sqlite3 PRIVATE corelib)
 target_link_libraries(test_db_wrapper PRIVATE corelib)
+target_link_libraries(test_db_write PRIVATE corelib)
