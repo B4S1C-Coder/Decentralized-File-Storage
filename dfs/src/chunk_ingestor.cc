@@ -32,7 +32,7 @@
   }
 
   // Store the chunk on disk (TO-DO: Make file name unique)
-  std::ofstream chunkFile("chunk_" + fsn::util::bytesToHex(packetHash) + ".bin", std::ios::app | std::ios::binary);
+  std::ofstream chunkFile("data/chunk_" + fsn::util::bytesToHex(packetHash) + ".bin", std::ios::app | std::ios::binary);
   chunkFile.write(chunkData.data(), chunkData.size());
   chunkFile.close();
 
