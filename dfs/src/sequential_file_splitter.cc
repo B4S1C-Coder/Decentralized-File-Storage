@@ -85,8 +85,8 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     encrypted_final.insert(encrypted_final.end(), metedata_bytes.begin(), metedata_bytes.end());
     encrypted_final.insert(encrypted_final.end(), encryptedBuffer.begin(), encryptedBuffer.end());
 
-
-    std::string chunkFileName = outputDirPath + "/" + fsn::util::bytesToHex(hash);
+    std::vector<char> encryptedHash = fsn::util::primitive_calculateSHA512Hash(encrypted_final);
+    std::string chunkFileName = outputDirPath + "/" + fsn::util::bytesToHex(encryptedHash);
     std::ofstream outfile(chunkFileName, std::ios::binary);
     
     if (!outfile.is_open()) {

@@ -17,6 +17,7 @@
   std::vector<char> packetHash(req->packethash().begin(), req->packethash().end());
 
   if (packetHash.size() != crypto_hash_sha512_BYTES) {
+    fsn::logger::consoleLog("packetHash size = " + std::to_string(packetHash.size()));
     fsn::logger::consoleLog("Chunk rejected as invalid hash provided.", fsn::logger::WARN);
     res->set_chunkaccepted(false);
     return grpc::Status(::grpc::StatusCode::INVALID_ARGUMENT, "Invalid packet hash size.");
@@ -49,6 +50,7 @@
   std::vector<char> packetHash(req->packethash().begin(), req->packethash().end());
 
   if (packetHash.size() != crypto_hash_sha512_BYTES) {
+    fsn::logger::consoleLog("packetHash size = " + std::to_string(packetHash.size()));
     fsn::logger::consoleLog("Invalid hash provided. Request rejected.", fsn::logger::WARN);
     res->set_chunkdata("");
     return grpc::Status(::grpc::StatusCode::INVALID_ARGUMENT, "Invalid packet hash size");

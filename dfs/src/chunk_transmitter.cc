@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <sodium.h>
 
 #include "chunk_transmitter.hh"
 #include "util.hh"
@@ -12,10 +13,14 @@
 
 void fsn::ChunkTransmitter::ingestChunk(std::unique_ptr<std::vector<char>> chunk) {
   CommData commdata;
-  commdata.set_chunkdata(chunk->data());
-  commdata.set_packethash(
-    fsn::util::primitive_calculateSHA512Hash(*chunk).data()
-  );
+  commdata.set_chunkdata(chunk->data(), chunk->size());
+  // commdata.set_packethash(
+  //   fsn::util::primitive_calculateSHA512Hash(*chunk).data(),
+  //   crypto_hash_sha512_BYTES
+  // );/
+
+  auto hash = fsn::util::primitive_calculateSHA512Hash(*chunk);
+  commdata.set_packethash(hash.data(), hash.size());
 
   CommResp response;
   grpc::ClientContext context;
