@@ -53,8 +53,6 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
   int chunkCount = 1;
 
   std::vector<char> token = fsn::util::primitive_generateRandomToken();
-  // fsn::diagnostics::checkNullBytesInBuffer("Token Buffer", token);
-  fsn::logger::consoleLog("Token generated.");
 
   while (true) {
 
@@ -62,38 +60,24 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     buffer.resize(m_bytesPerChunks);
     m_currentFile->read(buffer.data(), m_bytesPerChunks);
     std::streamsize dataSize = m_currentFile->gcount();
-    fsn::logger::consoleLog("Characters Extracted: " + std::to_string(dataSize));
 
     if (dataSize == 0) {
       break;
     }
 
     buffer.resize(dataSize);
-    fsn::logger::consoleLog("Data buffer loaded. (UNENCRYPTED)");
 
     // Encrypt the chunk data
     std::vector<char> encryptedBuffer = m_streamEncDec.xchacha20poly1305_encrypt(buffer);
 
-    std::string chunkFileName = outputDirPath + "/" + std::to_string(chunkCount++) + ".fsnc";
-
     // Calculate hash of the data
     std::vector<char> hash = fsn::util::primitive_calculateSHA512Hash(buffer);
-    fsn::logger::consoleLog("Hash Calculated");
 
     size_t dataEnd = hash.size() + token.size() + sizeof(size_t) + fsn::util::to_paddedString(dataSize).size() + encryptedBuffer.size() - 1;
-    
-    fsn::logger::consoleLog(
-      "DATA END BREAKDOWN: hashSize = " + std::to_string(hash.size()) + " tokenSize = " + std::to_string(token.size())
-      + "sizeof size_t = " + std::to_string(sizeof(size_t)) + " dataSizeStringSize = "
-      + std::to_string(fsn::util::to_paddedString(dataSize).size()) + " encBufferSize = " + std::to_string(encryptedBuffer.size()) + " - 1"
-    );
 
     // Construct the metadata for the chunk
     ChunkMetadata metadata(dataEnd, hash, token);
     std::vector<char> metedata_bytes = metadata.construct();
-
-    // fsn::diagnostics::checkNullBytesInBuffer("Meta Data Buffer", metedata_bytes);
-    fsn::logger::consoleLog("Meta Data constricted. Data End: " + std::to_string(dataEnd));
 
     // Create the final buffer to be written (without encryption)
     std::vector<char> encrypted_final;
@@ -101,25 +85,20 @@ int fsn::SequentialFileSplitter::singleThreadedSplit(const std::string& outputDi
     encrypted_final.insert(encrypted_final.end(), metedata_bytes.begin(), metedata_bytes.end());
     encrypted_final.insert(encrypted_final.end(), encryptedBuffer.begin(), encryptedBuffer.end());
 
-    fsn::logger::consoleLog("Final Chunk Size: " + std::to_string(encrypted_final.size()));
-    fsn::logger::consoleLog("Meta Data Buffer Size: " + std::to_string(metedata_bytes.size()));
-    fsn::logger::consoleLog("Hash Buffer Size: " + std::to_string(hash.size()));
-    fsn::logger::consoleLog("Token Buffer Size: " + std::to_string(token.size()));
-    fsn::logger::consoleLog("Payload Buffer Size: " + std::to_string(encryptedBuffer.size()));
 
+    std::string chunkFileName = outputDirPath + "/" + fsn::util::bytesToHex(hash);
     std::ofstream outfile(chunkFileName, std::ios::binary);
     
     if (!outfile.is_open()) {
-      std::cout << "Unable to write chunks to disk.\n";
+      fsn::logger::consoleLog("Unable to write chunk to disk. \n", fsn::logger::ERROR);
       return -1;
     }
 
     outfile.write(encrypted_final.data(), encrypted_final.size());
     outfile.close();
 
-    fsn::logger::consoleLog("Chunk written to disk.");
-
-    std::cout << "-------------------\n";
+    m_chunkFiles.push_back(chunkFileName);
+    fsn::logger::consoleLog("Chunk written to disk - " + chunkFileName);
   }
 
   return 0;

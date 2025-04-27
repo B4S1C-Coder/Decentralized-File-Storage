@@ -5,6 +5,7 @@
 #include <sodium.h>
 #include <vector>
 #include <fstream>
+#include <string>
 #include "chunk_ingestor.hh"
 #include "util.hh"
 #include "logger.hh"
@@ -16,6 +17,7 @@
   std::vector<char> packetHash(req->packethash().begin(), req->packethash().end());
 
   if (packetHash.size() != crypto_hash_sha512_BYTES) {
+    fsn::logger::consoleLog("Chunk rejected as invalid hash provided.", fsn::logger::WARN);
     res->set_chunkaccepted(false);
     return grpc::Status(::grpc::StatusCode::INVALID_ARGUMENT, "Invalid packet hash size.");
   }
@@ -27,6 +29,7 @@
   );
 
   if (!hashesMatch) {
+    fsn::logger::consoleLog("Chunk rejected as hashes do not match.", fsn::logger::WARN);
     res->set_chunkaccepted(false);
     return grpc::Status::CANCELLED;
   }
@@ -36,6 +39,41 @@
   chunkFile.write(chunkData.data(), chunkData.size());
   chunkFile.close();
 
+  fsn::logger::consoleLog("Chunk Accepted.", fsn::logger::INFO);
+
   res->set_chunkaccepted(true);
+  return grpc::Status::OK;
+}
+
+::grpc::Status fsn::ChunkIngestionImpl::ejectChunk(::grpc::ServerContext* context, const ::CommChunkReq* req, ::CommChunkRes* res) {
+  std::vector<char> packetHash(req->packethash().begin(), req->packethash().end());
+
+  if (packetHash.size() != crypto_hash_sha512_BYTES) {
+    fsn::logger::consoleLog("Invalid hash provided. Request rejected.", fsn::logger::WARN);
+    res->set_chunkdata("");
+    return grpc::Status(::grpc::StatusCode::INVALID_ARGUMENT, "Invalid packet hash size");
+  }
+
+  std::string fileName = "data/chunk_" + fsn::util::bytesToHex(packetHash) + ".bin";
+
+  std::ifstream chunkFile(fileName, std::ios::binary);
+  if (!chunkFile) {
+    fsn::logger::consoleLog("Chunk not found.", fsn::logger::ERROR);
+    res->set_chunkdata("");
+    return grpc::Status(::grpc::StatusCode::NOT_FOUND, "Chunk not found.");
+  }
+
+  chunkFile.seekg(0, std::ios::end);
+  std::streamsize chunkSize = chunkFile.tellg();
+  chunkFile.seekg(0, std::ios::beg);
+
+  std::vector<char> chunkData(chunkSize);
+  if (!chunkFile.read(chunkData.data(), chunkSize)) {
+    fsn::logger::consoleLog("Unable to read chunk", fsn::logger::ERROR);
+    res->set_chunkdata("");
+    return grpc::Status(::grpc::StatusCode::INTERNAL, "Unable to read chunk.");
+  }
+
+  res->set_chunkdata(chunkData.data(), chunkData.size());
   return grpc::Status::OK;
 }

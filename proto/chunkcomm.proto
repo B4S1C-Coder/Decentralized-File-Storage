@@ -9,6 +9,15 @@ message CommResp {
   bool chunkAccepted = 1;
 }
 
+message CommChunkReq {
+  bytes packetHash = 1;
+}
+
+message CommChunkRes {
+  bytes chunkData = 1;
+}
+
 service ChunkIngestion {
   rpc ingestChunk(CommData) returns (CommResp) {}
+  rpc ejectChunk(CommChunkReq) returns (CommChunkRes) {}
 }

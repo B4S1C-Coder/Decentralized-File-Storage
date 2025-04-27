@@ -9,6 +9,7 @@ namespace fsn {
 
 class ChunkIngestionImpl : public ChunkIngestion::Service {
   virtual ::grpc::Status ingestChunk(::grpc::ServerContext* context, const ::CommData* req, ::CommResp* res);
+  virtual ::grpc::Status ejectChunk(::grpc::ServerContext* context, const ::CommChunkReq* req, ::CommChunkRes* res);
 };
 
 }

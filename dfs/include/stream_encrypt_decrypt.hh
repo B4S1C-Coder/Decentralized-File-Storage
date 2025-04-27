@@ -17,6 +17,7 @@ public:
     std::optional<std::pair<std::string, std::string>> keyFileNonceFile = std::nullopt
   );
   void printStatus();
+  void dumpKeyAndNonce();
 
   std::pair<std::unique_ptr<unsigned char[]>, size_t> encrypt(
     std::unique_ptr<unsigned char[]> message, size_t messageLen

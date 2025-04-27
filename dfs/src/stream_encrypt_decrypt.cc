@@ -9,6 +9,7 @@
 #include <vector>
 #include "stream_encrypt_decrypt.hh"
 #include "util.hh"
+#include "logger.hh"
 
 fsn::StreamEncryptorDecryptor::StreamEncryptorDecryptor(
   std::optional<std::pair<std::string, std::string>> keyFileNonceFile
@@ -46,6 +47,26 @@ void fsn::StreamEncryptorDecryptor::printStatus() {
     std::cout << "m_key is present" << std::endl;
   if (m_nonce)
     std::cout << "nonce is present" << std::endl;
+}
+
+void fsn::StreamEncryptorDecryptor::dumpKeyAndNonce() {
+  std::ofstream keyFile("key.bin", std::ios::binary);
+
+  if (keyFile) {
+    keyFile.write(reinterpret_cast<const char*>(m_key), sizeof(m_key));
+    keyFile.close();
+  } else {
+    fsn::logger::consoleLog("Failed to dump key.", fsn::logger::ERROR);
+  }
+
+  std::ofstream nonceFile("nonce.bin", std::ios::binary);
+
+  if (nonceFile) {
+    nonceFile.write(reinterpret_cast<const char*>(m_nonce), sizeof(m_nonce));
+    nonceFile.close();
+  } else {
+    fsn::logger::consoleLog("Failed to dump nonce", fsn::logger::ERROR);
+  }
 }
 
 std::pair<std::unique_ptr<unsigned char[]>, size_t> fsn::StreamEncryptorDecryptor::encrypt(

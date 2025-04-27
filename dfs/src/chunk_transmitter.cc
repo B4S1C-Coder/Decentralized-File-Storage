@@ -33,3 +33,21 @@ void fsn::ChunkTransmitter::ingestChunk(std::unique_ptr<std::vector<char>> chunk
     return;
   }
 }
+
+std::optional<std::unique_ptr<std::vector<char>>> fsn::ChunkTransmitter::ejectChunk(const std::vector<char>& packetHash) {
+  CommChunkReq req;
+  req.set_packethash(packetHash.data(), packetHash.size());
+
+  CommChunkRes res;
+  grpc::ClientContext context;
+
+  grpc::Status status = stub_->ejectChunk(&context, req, &res);
+
+  if (status.ok()) {
+    fsn::logger::consoleLog("Chunk Received.", fsn::logger::INFO);
+    return std::make_unique<std::vector<char>>(res.chunkdata().begin(), res.chunkdata().end());
+  } else {
+    fsn::logger::consoleLog("gRPC call failed - " + status.error_message(), fsn::logger::ERROR);
+    return std::nullopt;
+  }
+}

@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
   fsn::ChunkIngestionImpl chunkIngest;
   grpc::ServerBuilder builder;
 
-  const std::string serverCompleteDomain = ns.domain + ":" + std::to_string(ns.port);
+  const std::string serverCompleteDomain = ns.ip + ":" + std::to_string(ns.port);
 
   fsn::logger::consoleLog("Server started and listening on " + serverCompleteDomain, fsn::logger::INFO);
 
