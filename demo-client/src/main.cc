@@ -37,6 +37,7 @@ void transmitFile(
   }
 
   int totalNodes = fileTransmitters.size();
+  int transmitterIndex = 0;
 
   // TO-DO: Transmit the chunks
   for (int i = 0; i < chunkFilePaths.size(); i++) {
@@ -48,7 +49,12 @@ void transmitFile(
       return;
     }
     std::unique_ptr<std::vector<char>> data = std::move(file.value());
-    fileTransmitters[i % totalNodes].ingestChunk(std::move(data));
+    
+    fileTransmitters[transmitterIndex].ingestChunk(std::move(data));
+    transmitterIndex = (transmitterIndex + 1) % totalNodes;
+
+    fsn::logger::consoleLog("Transmitter Index - " + std::to_string(transmitterIndex), fsn::logger::INFO);
+
     fsn::logger::consoleLog("Transmitted - " + chunkFilePaths[i], fsn::logger::INFO);
   }
 
@@ -96,6 +102,8 @@ int main(int argc, char* argv[]) {
     fsn::logger::consoleLog("Failed to communicate with registry.", fsn::logger::ERROR);
     return 3;
   }
+
+  fsn::logger::consoleLog("Detected - " + std::to_string(fileTransmitters.size()) + " Nodes", fsn::logger::INFO);
 
   if (std::string(argv[1]) == "--transmit") {
     transmitFile(fileSplitter, encryptionProvider, fileTransmitters);

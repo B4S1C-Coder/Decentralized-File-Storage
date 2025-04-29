@@ -31,7 +31,7 @@ app.post('/register-node', (req, res) => {
       occupied: req.body.occupied
     };
 
-    const index = inMemoryDataStorage.findIndex(obj => obj.domain === data.domain);
+    const index = inMemoryDataStorage.findIndex(obj => obj.port === data.port);
 
     if (index !== -1) {
       inMemoryDataStorage[index] = { ...inMemoryDataStorage[index], ...data };
