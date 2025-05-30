@@ -8,8 +8,7 @@
 #include <cstring>
 #include <vector>
 #include "stream_encrypt_decrypt.hh"
-#include "util.hh"
-#include "logger.hh"
+#include <dfs-core.hh>
 
 fsn::StreamEncryptorDecryptor::StreamEncryptorDecryptor(
   std::optional<std::pair<std::string, std::string>> keyFileNonceFile

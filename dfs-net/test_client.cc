@@ -1,7 +1,6 @@
 #include <grpcpp/grpcpp.h>
 #include "chunk_transmitter.hh"
-#include "util.hh"
-#include "logger.hh"
+#include <dfs-core.hh>
 #include <memory>
 #include <vector>
 

@@ -1,6 +1,6 @@
 #include <grpcpp/grpcpp.h>
 #include "chunk_ingestor.hh"
-#include "logger.hh"
+#include <dfs-core.hh>
 #include <memory>
 
 int main() {

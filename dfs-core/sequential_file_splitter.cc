@@ -9,7 +9,7 @@
 #include "chunk_metadata.hh"
 #include "diagnostics.hh"
 #include "logger.hh"
-#include "stream_encrypt_decrypt.hh"
+#include <dfs-crypto.hh>
 
 fsn::SequentialFileSplitter::SequentialFileSplitter(const std::string& filePath, unsigned int numChunks)
 : m_numChunks(numChunks), m_bytesInFile(0), m_bytesPerChunks(0), m_currentFilePath(filePath) {

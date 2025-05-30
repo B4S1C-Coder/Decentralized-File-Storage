@@ -7,8 +7,7 @@
 #include <fstream>
 #include <string>
 #include "chunk_ingestor.hh"
-#include "util.hh"
-#include "logger.hh"
+#include <dfs-core.hh>
 
 ::grpc::Status fsn::ChunkIngestionImpl::ingestChunk(::grpc::ServerContext* context, const ::CommData* req, ::CommResp* res) {
   

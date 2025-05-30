@@ -8,8 +8,7 @@
 #include <string>
 #include <optional>
 #include "stream_encrypt_decrypt.hh"
-#include "sequential_file_splitter.hh"
-#include "chunk_metadata.hh"
+#include <dfs-core.hh>
 
 const std::string dataFilePath = "../res/data.txt";
 

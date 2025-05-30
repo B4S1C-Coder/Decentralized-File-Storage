@@ -1,4 +1,4 @@
-#include "core/db.hh"
+#include "db.hh"
 
 core::SQLite3DB::SQLite3DB(const std::string& path): m_dbFilePath(path), m_db(nullptr, sqlite3_close) {
   sqlite3* db = nullptr;

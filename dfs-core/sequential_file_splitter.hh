@@ -5,7 +5,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <vector>
-#include "stream_encrypt_decrypt.hh"
+#include <dfs-crypto.hh>
 
 namespace fsn {
 

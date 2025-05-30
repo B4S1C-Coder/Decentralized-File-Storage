@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <any>
 #include <sqlite3.h>
-#include "core/db.hh"
+#include "db.hh"
 
 // Various DTOs for internal use, to be used by SQLite3 Database Wrapper
 

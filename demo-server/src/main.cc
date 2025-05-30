@@ -7,7 +7,9 @@
 #include <cstdlib>
 #include <grpcpp/grpcpp.h>
 #include <memory>
-#include "dfs.hh"
+#include <dfs-core.hh>
+#include <dfs-crypto.hh>
+#include <dfs-net.hh>
 
 struct nodeState {
   std::string ip;

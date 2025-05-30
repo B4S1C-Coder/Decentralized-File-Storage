@@ -1,0 +1,2 @@
+./demo_client --transmit ../../res/data.txt 5
+./demo_server localhost localhost 50051

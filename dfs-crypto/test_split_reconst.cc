@@ -1,9 +1,6 @@
 #include <sodium.h>
-#include "sequential_file_splitter.hh"
+#include <dfs-core.hh>
 #include "stream_encrypt_decrypt.hh"
-#include "chunk_metadata.hh"
-#include "logger.hh"
-#include "util.hh"
 
 void manualReconstruction(fsn::StreamEncryptorDecryptor sed) {
   if (sodium_init() == -1) {

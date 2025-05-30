@@ -14,13 +14,14 @@ target_link_libraries(demo_server
     OpenSSL::SSL
     OpenSSL::Crypto
     Threads::Threads
-    dfs
+    dfs-core
+    dfs-crypto
+    dfs-net
 )
 
 target_include_directories(demo_server
   PRIVATE
     ${LIBSODIUM_INCLUDE_DIRS}
-    ${CMAKE_SOURCE_DIR}/dfs/include
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    ${CMAKE_BINARY_DIR}/dfs
+    ${CMAKE_BINARY_DIR}/dfs-net
 )

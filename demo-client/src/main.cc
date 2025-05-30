@@ -1,7 +1,9 @@
 #include <cstdlib>
 #include <httplib.h>
 #include <nlohmann/json.hpp>
-#include "dfs.hh"
+#include <dfs-core.hh>
+#include <dfs-crypto.hh>
+#include <dfs-net.hh>
 
 void transmitFile(
   fsn::SequentialFileSplitter& fileSplitter,

@@ -7,8 +7,8 @@
 #include <type_traits>
 #include <stdexcept>
 #include <sqlite3.h>
-#include "dfs.hh"
-#include "core/dto.hh"
+#include "dfs-core.hh"
+#include "dto.hh"
 
 // SQLite3 Database Wrapper, for easy database operations
 namespace core {

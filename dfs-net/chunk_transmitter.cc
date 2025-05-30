@@ -8,8 +8,7 @@
 #include <sodium.h>
 
 #include "chunk_transmitter.hh"
-#include "util.hh"
-#include "logger.hh"
+#include <dfs-core.hh>
 
 void fsn::ChunkTransmitter::ingestChunk(std::unique_ptr<std::vector<char>> chunk) {
   CommData commdata;

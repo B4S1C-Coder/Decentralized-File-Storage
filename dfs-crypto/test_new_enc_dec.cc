@@ -4,7 +4,7 @@
 #include <optional>
 #include <sodium.h>
 #include "stream_encrypt_decrypt.hh"
-#include "util.hh"
+#include <dfs-core.hh>
 
 int main() {
 
