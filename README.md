@@ -4,7 +4,7 @@
 
 <h1 align="center">Decentralized File Storage Network (dFSN)</h1>
 
-dFSN is a small distributed file storage newtwork which allows the user to split and disperse their files over a network ensuring that other than the user no one else can re-construct the files. The network utilises gRPC for transmission and sodium for file encryption. The network is peer-to-peer eliminating any middle man between the user and the storage nodes.
+dFSN is a small distributed file storage network which allows the user to split and disperse their files over a network ensuring that other than the user no one else can re-construct the files. The network utilises gRPC for transmission and sodium for file encryption. The network is peer-to-peer eliminating any middle man between the user and the storage nodes.
 
 >**Note**: The project includes vendor headers and files. Please see the associated [licenses](.licenses).
 
