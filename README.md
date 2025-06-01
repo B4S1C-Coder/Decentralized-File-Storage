@@ -1,25 +1,42 @@
-# Decentralized File Storage Network (dFSN)
+<p align="center">
+  <img src=".docs/dfsn_logo.png" width="250" alt="Decentralized File Storage Logo" />
+</p>
+
+<h1 align="center">Decentralized File Storage Network (dFSN)</h1>
+
 dFSN is a small distributed file storage newtwork which allows the user to split and disperse their files over a network ensuring that other than the user no one else can re-construct the files. The network utilises gRPC for transmission and sodium for file encryption. The network is peer-to-peer eliminating any middle man between the user and the storage nodes.
 
->**Note**: This project is currently under development and this README would be updated as the project progresses.
+>**Note**: The project includes vendor headers and files. Please see the associated [licenses](.licenses).
 
-## Techstack (will be updated as development continues)
-C/C++, gRPC, Sodium, protobuf, SQLite, Angular, SCSS
+## Network Architecture
+The network has two interoperable variants: Organization Hosted and Open.
 
-## Architecture of the Network
-![Working](DecentralizedFileStorage.jpg)
-This is what I initially thought of.
-![New Architecture](DecentralizedFileStorage2.0.jpg)
-The new architecture eliminates centralization around tracking servers.
+The network can be used as a secure storage medium especially for archival storage for eg. blueprints, customer documents (PII), etc. that are not accessed frequently but are extremely sensitive. For such use cases, tracking servers allow the organization to have a more greater control over where the chunks are being stored, the process of actually creating the chunks and reconstructing the file can only be done by the uploading user.
+
+![Organization Hosted](.docs/DecentralizedFileStorage.jpg)
+<p align="center">Organization Hosted dFSN</p>
+
+The second variant is the *true* decentralized file storage network where only the uploading user decides where and how the chunks are stored. Each storage node cluster follow a *db-cluster* like topology where a leader node is responsible for handling incoming nodes, replicating and dispersing them across the cluster and following a robust failover procedure (*under development*).
+
+![New Architecture](.docs/DecentralizedFileStorage2.0.jpg)
+<p align="center">Open dFSN</p>
 
 ### Work Flow
 The diagram describes the overall workflow from the user client's perspective.
-![Work Flow](WorkFlow.jpg)
+![Work Flow](.docs/WorkFlow.jpg)
 
 There are broadly three steps *after splitting the file* into encypted chunks:
-- Firstly, choose the clusters where the chunks are going to be stored
-- Secondly, request each cluster to allocate space for your chunks with appropriate replication
-- Lastly, upload the chunks to the specific nodes as told by the respective clusters.
+- Choose the clusters where the chunks are going to be stored
+- Request each cluster to allocate space for your chunks with appropriate replication
+- Upload the chunks to the specific nodes as told by the respective clusters.
+
+## Technology Stack
+- C/C++
+- gRPC
+- Sodium
+- protobuf
+- SQLite
+- Angular
 
 ### Ideology behind the Network
 As illustrated in the diagram, the user client would decide the distribution of encypted chunks and the storage nodes which the client would send these chunks to would be decided by the tracking server.
@@ -37,14 +54,14 @@ If this were commercial how would we get the storage nodes?
 
 
 ## Setup
-1. Setup gRPC (1.66.0) for C/C++ by following the guide on [grpc.io](https://grpc.io/docs/languages/cpp/quickstart/)
+1. Setup **gRPC (1.66.0)** for C/C++ by following the guide on [grpc.io](https://grpc.io/docs/languages/cpp/quickstart/)
 
 2. Setup libsodium (you can install it via apt package manager if on Debian based distros): [Sodium docs](https://doc.libsodium.org/installation)
 
 3. Clone the repository via `git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git`
 
-4. In the [dfs/CMakeLists.txt](dfs/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
-```
+4. In the [dfs-core/CMakeLists.txt](dfs/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
+```cmake
 protobuf_generate(
   LANGUAGE grpc
   OUT_VAR GRPC_SRCS
@@ -55,9 +72,9 @@ protobuf_generate(
   PROTOS ${PROTO_FILES}
 )
 ```
-5. Install npm packages for client-ui and tracker-ui: `cd client-ui && npm i && cd ../tracker-ui && npm i && cd ..`
+5. Install npm packages: `npm i`
 
-6. Last but not the least build dfs:
+6. Last but not the least build the project:
  - In the project root run: `mkdir build && cd build && cmake .. && make`
  - The build should progress smoothly provided you have set-up gRPC and Sodium correctly
  
