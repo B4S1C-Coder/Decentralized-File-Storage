@@ -60,7 +60,7 @@ If this were commercial how would we get the storage nodes?
 
 3. Clone the repository via `git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git`
 
-4. In the [dfs-core/CMakeLists.txt](dfs/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
+4. In the [dfs-net/CMakeLists.txt](dfs-net/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
 ```cmake
 protobuf_generate(
   LANGUAGE grpc
