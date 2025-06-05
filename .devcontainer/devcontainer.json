@@ -1,7 +1,7 @@
 {
   "name": "dFSN Development Environment",
   "build": {
-    "dockerfile": "infra/dev.Dockerfile",
+    "dockerfile": "../infra/dev.Dockerfile",
     "context": ".."
   },
   "workspaceFolder": "/workspace",
