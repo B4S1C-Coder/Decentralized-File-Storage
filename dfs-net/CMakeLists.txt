@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 project(dfs-net)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
+# Example grpc plugin path: /home/saksham/grpc_install_dir/bin/grpc_cpp_plugin
+if (NOT DEFINED ENV{DFSN_GRPC_CPP_PLUGIN})
+  message(FATAL_ERROR "Environment variable DFSN_GRPC_CPP_PLUGIN is not set. Please set this to your GRPC C++ Plugin Path.")
+endif()
+
+set(DFSN_GRPC_CPP_PLUGIN_EXECUTABLE $ENV{DFSN_GRPC_CPP_PLUGIN})
+
 # gRPC and Protobuf
 find_package(Protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
@@ -23,7 +30,7 @@ protobuf_generate(
   OUT_VAR GRPC_SRCS
   TARGET protolib
   GENERATE_EXTENSIONS .grpc.pb.hh .grpc.pb.cc
-  PLUGIN "protoc-gen-grpc=/home/saksham/grpc_install_dir/bin/grpc_cpp_plugin"
+  PLUGIN "protoc-gen-grpc=${DFSN_GRPC_CPP_PLUGIN_EXECUTABLE}"
   IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../proto
   PROTOS ${PROTO_FILES}
 )

@@ -58,24 +58,30 @@ If this were commercial how would we get the storage nodes?
 
 2. Setup libsodium (you can install it via apt package manager if on Debian based distros): [Sodium docs](https://doc.libsodium.org/installation)
 
-3. Clone the repository via `git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git`
-
-4. In the [dfs-net/CMakeLists.txt](dfs-net/CMakeLists.txt) find the below snippet and add your gRPC Plugin path as shown:
-```cmake
-protobuf_generate(
-  LANGUAGE grpc
-  OUT_VAR GRPC_SRCS
-  TARGET protolib
-  GENERATE_EXTENSIONS .grpc.pb.hh .grpc.pb.cc
-  PLUGIN "protoc-gen-grpc=/your/path/to/your/grpc_install_dir/bin/grpc_cpp_plugin"
-  IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../proto
-  PROTOS ${PROTO_FILES}
-)
+3. Clone the repository:
+```bash
+git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git && cd 'Decentralized-File-Storage'
 ```
-5. Install npm packages: `npm i`
 
-6. Last but not the least build the project:
- - In the project root run: `mkdir build && cd build && cmake .. && make`
- - The build should progress smoothly provided you have set-up gRPC and Sodium correctly
+4. Create a `.env` file from the given example. Populate the environment variables in the `.env`, each variable has a description explaining what it does:
+```bash
+cp .env.example .env
+```
+
+5. Install npm packages:
+```bash
+npm i
+```
+6. Give execute permissions to scripts:
+```bash
+chmod +x ./scripts/*.sh
+```
+
+7. Last but not the least build the project:
+ - In the project root run:
+ ```bash
+ ./scripts/clean-build.sh
+ ```
+ - The build should progress smoothly provided you have set-up gRPC and Sodium correctly as well as set the variables in `.env` correctly.
  
->**Note**: This project is being developed and tested on `WSL2 Ubuntu 24.04.2 LTS` with `g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0`. It is recommended that you use Linux or WSL, however as of writing, there are no platform specific components.
+>**Note**: This project is being developed and tested on `WSL2 Ubuntu 24.04.2 LTS` with `g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0`. It is recommended that you use Linux or WSL.
