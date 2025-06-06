@@ -1,2 +1,4 @@
 ./demo_client --transmit ../../res/data.txt 5
 ./demo_server localhost localhost 50051
+docker build -f infra/dev.Dockerfile -t dfs-dev .
+docker run -it --rm -v "$(pwd)":/workspace -w /workspace dfs-dev
