@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 project(storage_node_core)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
