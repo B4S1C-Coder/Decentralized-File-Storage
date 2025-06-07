@@ -54,6 +54,35 @@ If this were commercial how would we get the storage nodes?
 
 
 ## Setup
+The docker image only provides you the environment to build and run the C++ portions of the project. Since the actual codebase is mounted from outside the container, NodeJS must be installed locally. While installing packages inside the container is possible, it may lead to overriding of `node_modules` folder when you mount the codebase. Additionally, the image uses `ubuntu:24.04` as the base image, you can experiment and use a lighter base image (in that case make sure to exclude your `infra/dev.Dockerfile` in your `.git/info/exclude`. This is only if you wish to contribute to the project).
+
+### Setup (Docker)
+1. Clone the repository:
+```bash
+git clone https://github.com/B4S1C-Coder/Decentralized-File-Storage.git && cd 'Decentralized-File-Storage'
+```
+
+2. Build the docker image:
+```bash
+docker build -f infra/dev.Dockerfile -t dfs-dev .
+```
+
+3. Run the development container:
+```bash
+docker run -it --rm -v "$(pwd)":/workspace -w /workspace dfs-dev
+```
+
+4. Build the project (ensure you are in the container shell):
+```bash
+./scripts/clean-build.sh --no-env
+```
+
+5. Install npm packages (recommended to install outside the container, locally):
+```bash
+npm i && cd demo-registry && npm i && cd ..
+```
+
+### Setup (local)
 1. Setup **gRPC (1.66.0)** for C/C++ by following the guide on [grpc.io](https://grpc.io/docs/languages/cpp/quickstart/)
 
 2. Setup libsodium (you can install it via apt package manager if on Debian based distros): [Sodium docs](https://doc.libsodium.org/installation)
@@ -70,8 +99,9 @@ cp .env.example .env
 
 5. Install npm packages:
 ```bash
-npm i
+npm i && cd demo-registry && npm i && cd ..
 ```
+
 6. Give execute permissions to scripts:
 ```bash
 chmod +x ./scripts/*.sh
@@ -85,3 +115,23 @@ chmod +x ./scripts/*.sh
  - The build should progress smoothly provided you have set-up gRPC and Sodium correctly as well as set the variables in `.env` correctly.
  
 >**Note**: This project is being developed and tested on `WSL2 Ubuntu 24.04.2 LTS` with `g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0`. It is recommended that you use Linux or WSL.
+
+## Running the Project
+The following applies to running the `demo-*` projects only:
+
+1. After you've built the project, first start the demo registry:
+```bash
+cd demo-registry && node registry.js
+```
+
+2. Start the demo server (from `build/demo-server`):
+```bash
+./demo_server localhost localhost 50051
+```
+
+3. Start the demo client (from `build/demo-client`):
+```bash
+./demo_client --transmit ../../res/data.txt 5
+```
+
+>**Note**: Don't forget to expose the ports of the container if interacting from outside the container.
