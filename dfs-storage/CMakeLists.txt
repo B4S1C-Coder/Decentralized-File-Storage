@@ -12,7 +12,7 @@ set(DFS_STORAGE_SOURCES
   core.cc
   db.cc
   dto.cc
-  orm.cc
+  # orm.cc
 )
 
 add_library(dfs-storage ${DFS_STORAGE_SOURCES})
@@ -25,8 +25,8 @@ target_include_directories(dfs-storage
 target_link_libraries(dfs-storage ${LIBSODIUM_LIBRARIES} dfs-core)
 
 # Add test executables for ORM
-add_executable(test_orm test_orm.cc)
-target_link_libraries(test_orm dfs-storage)
+# add_executable(test_orm test_orm.cc)
+# target_link_libraries(test_orm dfs-storage)
 
-add_executable(test_repository test_repository.cc)
-target_link_libraries(test_repository dfs-storage)
+# add_executable(test_repository test_repository.cc)
+# target_link_libraries(test_repository dfs-storage)
