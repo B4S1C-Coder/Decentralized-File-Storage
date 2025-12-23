@@ -1,5 +1,5 @@
 # Legacy - Decentralized File Storage Network
-This folder contains, parts of the old codebase (prior to the commit "[The Great Purge](https://github.com/B4S1C-Coder/Decentralized-File-Storage/commit/a21aab40843e35ac1d4ac2f7630d9cc99cc3d63735ac1d4ac2f7630d9cc99cc3d637)". The current codebase has evolved directly from the old codebase.
+This folder contains, parts of the old codebase (prior to the commit "[The Great Purge](https://github.com/B4S1C-Coder/Decentralized-File-Storage/commit/a21aab40843e35ac1d4ac2f7630d9cc99cc3d637)". The current codebase has evolved directly from the old codebase.
 
 >**TLDR**: This folder contains old code, just for reference and is no longer part of the actual project. But still part of the codebase nonetheless.
 
