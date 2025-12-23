@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # 0 means: Don't spam me with version updates. Only send Security Alerts.
+    open-pull-requests-limit: 0
+    exclude-paths:
+      - "legacy/**"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    exclude-paths:
+      - "legacy/**"
