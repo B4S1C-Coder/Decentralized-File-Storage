@@ -1,0 +1,1 @@
+g++ -I include/ -L libs/ -o ./debug/test_fileencrypt src/test_fileencrypt.c src/fileencrypt.c -lsodium && ./debug/test_fileencrypt "dfs_user_client/client_storage/text1.txt" "text1.txt" "dfs_user_client/client_storage/chunks/"
